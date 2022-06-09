@@ -23,10 +23,20 @@ public:
   void changeLength(int length) {
     this->length = length;
   }
+
+  // You can declare a function prototype inside of the class, and implement it somewhere else
+  bool hasLargerArea(Rectangle &);
 };
+
+bool Rectangle::hasLargerArea(Rectangle &other) {
+  return this->area() > other.area();
+}
+
 
 int main() {
   Rectangle r(12, 3);
   std::cout << r.area() << std::endl;
+  Rectangle other(14, 6);
+  std::cout << "r has larger area than other ? " << r.hasLargerArea(other) << std::endl;
   return 0;
 }
