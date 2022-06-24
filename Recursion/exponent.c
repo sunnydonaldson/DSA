@@ -18,6 +18,19 @@ int recursiveExponent(int m, int n) {
   return recursiveExponent(m, n-1) * m;
 }
 
+// 2^8 = (2^2)^4
+// So if n is even, we can half the number of recursive calls we need to make
+int fasterRecursiveExponent(int m, int n) {
+  if (n == 0) {
+    return 1;
+  } else if (n % 2 == 0) {
+    return fasterRecursiveExponent(m*m, n/2);
+    
+  } else {
+    return m * fasterRecursiveExponent(m*m, (n-1)/2);
+  }
+}
+
 // O(1) space complexity
 // O(n) time complexity
 // No risk of stackoverflow
@@ -35,4 +48,5 @@ int main() {
   int n = getUserInt();
   printf("exponent (using recursion) of %d^%d: %d\n", m, n, recursiveExponent(m, n));
   printf("exponent (using iteration) of %d^%d: %d\n", m, n, iterativeExponent(m, n));
+  printf("exponent (using a faster recursive method) %d^%d: %d\n", m, n, fasterRecursiveExponent(m, n));
 }

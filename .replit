@@ -1,3 +1,3 @@
-language="cpp"
+language="c++"
 # run="g++ ./c-and-cpp/*.cpp -std=c++17 -o example_program && ./example_program && rm example_program"
 run='make create && ./main.o'
