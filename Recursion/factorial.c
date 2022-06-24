@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "../helpers/iohelper.h"
 
 /***********************************************************
 * The factorial of a number n (n!) is 1*2*3...*n,
@@ -35,8 +36,11 @@ int iterativeFactorial(int n) {
 }
 
 int main() {
-  int n = 5;
+  int n = getUserInt();
   printf("factorial of %d: %d\n", n, recursiveFactorial(n));
   printf("factorial of %d using iteration %d\n", n, iterativeFactorial(n));
+  // int *int_array = getUserInts(3);
+  // free(int_array);
+  
   return 0;
 }

@@ -5,6 +5,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "../helpers/iohelper.h"
 
 void treeRecursion(int n) {
   if (n > 0) {
@@ -15,6 +16,7 @@ void treeRecursion(int n) {
 }
 
 int main() {
-  treeRecursion(5);
+  
+  treeRecursion(getUserInt());
   return 0;
 }
