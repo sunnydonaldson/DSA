@@ -16,7 +16,6 @@ void treeRecursion(int n) {
 }
 
 int main() {
-  
   treeRecursion(getUserInt());
   return 0;
 }
