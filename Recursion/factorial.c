@@ -39,8 +39,8 @@ int main() {
   int n = getUserInt();
   printf("factorial of %d: %d\n", n, recursiveFactorial(n));
   printf("factorial of %d using iteration %d\n", n, iterativeFactorial(n));
-  // int *int_array = getUserInts(3);
-  // free(int_array);
+  int *int_array = getUserInts(3);
+  free(int_array);
   
   return 0;
 }

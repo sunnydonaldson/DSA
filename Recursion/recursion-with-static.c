@@ -1,25 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*************************************************************
+* Three recursion is where a recursive functions calls itself more than once.
+* Whereas linear recursion, is where a recursive function only calls itself once.
+************************************************************/
 
-int recursiveStuff(int n) {
-  //  This is an example of tail recursion,
-  // Because the recursive call happens after the logic in the method is carried out
-  static int x = 0; // In this case the static variable stays the same once the calling stage has finished
+#include<stdio.h>
+#include<stdlib.h>
+#include "../helpers/iohelper.h"
+
+void treeRecursion(int n) {
   if (n > 0) {
-    x++;
-    return recursiveStuff(n-1) + x;
-  } else {
-    return 0;
+    printf("%d\n", n);
+    treeRecursion(n - 1);
+    treeRecursion(n -1);
   }
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 2) {
-    printf("please pass a single integer\n");
-    return 1;
-  }
-  
-  int n = atoi(argv[1]);
-  printf("recursiveStuff(%d) = %d\n", n, recursiveStuff(n));
+int main() {
+  treeRecursion(getUserInt());
   return 0;
 }
