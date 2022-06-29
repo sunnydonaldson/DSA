@@ -5,7 +5,9 @@ include ../helpers/Makefile
 
 srcs = $(wildcard *.c)
 outputs = $(basename $(srcs))
-libs = ../helpers/iohelper.o
+libs = ../helpers/iohelper.o ../helpers/arrayhelper.o
+
+.PHONY: outputs
 
 # Maps a .c file to a .o (object) file
 .c.o:
@@ -19,7 +21,7 @@ libs = ../helpers/iohelper.o
 
 # Links the .o file (which gets compiled from the .c file above) 
 $(outputs): $(libs) $@
-	cc $^ $@.c -o $@
+	cc $^ $@.c -o $@ -lm
 
 clean :
 	rm $(basename $(srcs))

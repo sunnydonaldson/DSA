@@ -6,6 +6,7 @@
 
 int *getUserInts(int numInts);
 int getUserInt();
+void printIntArray(int *, int size);
 
 #endif
 
