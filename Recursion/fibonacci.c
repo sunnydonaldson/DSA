@@ -13,19 +13,26 @@ int recursiveFib(int n) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // If you trace the recursion tree, we see that it takes O(n) recursive calls
 int memoizedRecursiveFib(int n, int *seenCalls) {
 =======
+=======
+>>>>>>> origin/main
 int memoizedRecursiveFib(int n, int *seenCalls) {
   // There's conflicting advice on wether you should free dynamically allocated memory
   // being pointed to by a static pointer.  Carnegie Mellon says you don't, so I won't.
   // https://wiki.sei.cmu.edu/confluence/display/c/MEM31-C.+Free+dynamically+allocated+memory+when+no+longer+needed
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
 >>>>>>> origin/main
   if (n <= 1) {
     seenCalls[n] = n;
     return n;
   }
   
+<<<<<<< HEAD
 <<<<<<< HEAD
   if (seenCalls[n -1] == -1)
     seenCalls[n-1] = memoizedRecursiveFib(n -1, seenCalls);
@@ -34,6 +41,8 @@ int memoizedRecursiveFib(int n, int *seenCalls) {
   
   return seenCalls[n-2] + seenCalls[n-1];
 =======
+=======
+>>>>>>> origin/main
   if (seenCalls[n -1] == -1) {
     seenCalls[n -1] = memoizedRecursiveFib(n -1, seenCalls);
   }
@@ -41,6 +50,9 @@ int memoizedRecursiveFib(int n, int *seenCalls) {
     seenCalls[n -2] = memoizedRecursiveFib(n -2, seenCalls);
   }
   return seenCalls[n -2] + seenCalls[n -1];
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
 >>>>>>> origin/main
 }
 
@@ -65,14 +77,20 @@ int iterativeFib(int n) {
 int main() {
   int n = getUserInt();
 <<<<<<< HEAD
+<<<<<<< HEAD
   int *fibValues = fillValues(makeIntArray(n), n, -1);
   printf("memoized recursive fibonacci: %d\n", memoizedRecursiveFib(n, fibValues));
   printf("recursive fibonacci: %d\n", recursiveFib(n));
 =======
+=======
+>>>>>>> origin/main
   // It would be better to have seenCalls as a static variable
   // in the memoizedFib function, but it seems that some compilers
   // don't let you functions to initialize static variables.
   int *seenCalls = fillValues(makeIntArray(n), n, -1);
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
 >>>>>>> origin/main
   printf("iterative fibonacci: %d\n", iterativeFib(n));
   printf("Memoized recursive fibonacci: %d\n", memoizedRecursiveFib(n, seenCalls));
