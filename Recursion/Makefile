@@ -5,7 +5,7 @@ include ../helpers/Makefile
 
 srcs = $(wildcard *.c)
 outputs = $(basename $(srcs))
-libs = ../helpers/iohelper.o ../helpers/arrayhelper.o
+libs = ../helpers/iohelper.o ../helpers/arrayhelper.o ../helpers/stack.o
 
 .PHONY: outputs
 

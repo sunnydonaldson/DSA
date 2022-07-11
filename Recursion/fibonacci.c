@@ -12,28 +12,19 @@ int recursiveFib(int n) {
   return recursiveFib(n - 1) + recursiveFib(n - 2);
 }
 
-int memoizedRecursiveFib(int n) {
-  // There's conflicting advice on wether you should free dynamically allocated memory
-  // being pointed to by a static pointer.  Carnegie Mellon says you don't, so I won't.
-  // https://wiki.sei.cmu.edu/confluence/display/c/MEM31-C.+Free+dynamically+allocated+memory+when+no+longer+needed
-  static int *seenCalls = fillValues(makeIntArray(n), n, -1);
-
-  int x, int y;
+// If you trace the recursion tree, we see that it takes O(n) recursive calls
+int memoizedRecursiveFib(int n, int *seenCalls) {
   if (n <= 1) {
+    seenCalls[n] = n;
     return n;
   }
   
-  if (seenCalls[n -1] != -1) {
-    x = seenCalls[n -1];
-  } else {
-    x = memoizedRecursiveFib(n -1);
-  }
-  if (seenCalls[n -2] != -1) {
-    y = seenCalls[n -2];
-  } else {
-    y = memoizedRecursiveFib(n -2);
-  }
-  return x + y;
+  if (seenCalls[n -1] == -1)
+    seenCalls[n-1] = memoizedRecursiveFib(n -1, seenCalls);
+  if (seenCalls[n -2] == -1)
+    seenCalls[n-2] = memoizedRecursiveFib(n -2, seenCalls);
+  
+  return seenCalls[n-2] + seenCalls[n-1];
 }
 
 // O(n)
@@ -56,6 +47,8 @@ int iterativeFib(int n) {
 
 int main() {
   int n = getUserInt();
+  int *fibValues = fillValues(makeIntArray(n), n, -1);
+  printf("memoized recursive fibonacci: %d\n", memoizedRecursiveFib(n, fibValues));
   printf("recursive fibonacci: %d\n", recursiveFib(n));
   printf("iterative fibonacci: %d\n", iterativeFib(n));
 }
