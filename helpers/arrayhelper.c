@@ -1,5 +1,6 @@
 #include "arrayhelper.h"
 
+
 int *makeIntArray(int size) {
   int *arr = malloc(size * sizeof(int));
   fillValues(arr, size, 0);
