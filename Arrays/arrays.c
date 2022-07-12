@@ -25,8 +25,6 @@ void howToIncreaseSize() {
         printf("extra space: larger[%d] is %d\n", i, larger[i]);
     }
 
-    free(original);
-
     // You can also use memcpy
     printf("Another array size for an example");
     int otherSize = getUserInt();
@@ -36,10 +34,14 @@ void howToIncreaseSize() {
     fillValues(otherArr, otherSize, 8);
     int *otherBigArr = malloc(otherBigSize * sizeof(int));
 
-    memcpy(otherArr, otherBigArr, otherSize);
+    memcpy(otherBigArr, otherArr, otherBigSize * sizeof(int));
 
     printIntArray(otherBigArr, otherBigSize);
 
+    free(original);
+    free(larger);
+    free(otherArr);
+    free(otherBigArr);    
 }
 
 
