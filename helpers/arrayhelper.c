@@ -13,3 +13,8 @@ int  *fillValues(int *arr, int size, int value) {
   }
   return arr;
 }
+
+void copyInts(int *source, int *dest, int sourceSize) {
+  for (int i = 0; i < sourceSize; i++)
+    dest[i] = source[i];
+}

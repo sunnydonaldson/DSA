@@ -5,5 +5,6 @@
 
 int *makeIntArray(int);
 int *fillValues(int *arr, int size, int value);
+void copyInts(int *source, int *destination, int sourceSize);
 
 #endif
