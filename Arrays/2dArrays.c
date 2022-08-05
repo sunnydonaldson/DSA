@@ -1,3 +1,41 @@
+/**************************************************************************************
+ * In memory, 2d arrays are flattened out to just 1 dimension.
+ * So how do we map from the arr[i][j] notation that's convenient for programmers, to
+ * this flattened representation?
+ * We can either use the row-major or column-major formula.
+ * The row-major formula is what's used by the c-compiler,
+ * and it's probably the most common in other languages too.
+ * 
+ * With the row-major mapping, the 2d array is put into memory row by row.
+ * The row-major formula for a 2d array: arr[m][n] (m rows x n columns)
+ * Given the address of the first element in the array, L0;
+ * 
+ * The element at arr[i][j] = L0 + (i * n) + j
+ * 
+ * So for example, if we have a the matrix of size 3 x 2, and L0 = 100
+ * [[4, 6],
+ * [8, 3],
+ * [6, 3]]
+ * We can find the address of arr[2][1] with 100 + (3 * 1) + 2
+ * 
+ * 
+ * The other option is column-major mapping.
+ * With this option, the 2d array is put into memory column by column
+ * 
+ * The column major formula for a matrix of a 2d array, arr[m][n], given L0, is:
+ * arr[i][j] = L0 + (j * m) + i
+ * 
+ * Traditionally it's been said that there's no particular advantage to either mapping.
+ * Technically they do have the same number of operations, and the user of the array
+ * will interact with them in the same way regardless.
+ * 
+ * However, because of how caching works (By loading data near what's currently being accessed into memory)
+ * if you know you're going to be iterating over the data in order, the row-major mapping would be
+ * better because the CPU will have already cached the next few elements by the time you come to read them.
+ * 
+ * These formulas can be generalised to work with N-dimensional arrays.
+ * I don't have motivation to do that now.
+ *************************************************************************************/
 #include "../helpers/iohelper.h"
 
 void array2D()
