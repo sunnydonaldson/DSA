@@ -83,5 +83,9 @@ void pointerToArrayOfPointers()
 
 int main()
 {
+  // Doesn't actually do anything the user can see.
+  pointerToArrayOfPointers();
+  arrayOfPointers();
+  array2D();
   return 0;
 }
