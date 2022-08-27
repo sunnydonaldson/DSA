@@ -55,11 +55,21 @@ void append(Array *arr, int value)
   arr->arr[arr->length++] = value;
 }
 
+// Because the struct has members on the heap we need to explicitly free them
+// Accept a pointer to pointer so we can guarantee setting it to null.
+void freeArray(Array **arr)
+{
+  free((*arr)->arr);
+  free(*arr);
+  *arr = NULL;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
   append(array, 12);
   append(array, 14);
   printArray(array);
+  freeArray(&array);
   return 0;
 }
