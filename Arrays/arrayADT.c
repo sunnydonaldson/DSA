@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TRUE 1
+#define FALSE 0
+
 typedef struct Array {
   int *arr;
   size_t size;
@@ -26,6 +29,7 @@ void append(Array *arr, int value);
 void freeArray(Array **arr);
 int get(Array *arr, size_t idx);
 void set(Array *arr, size_t idx, int value);
+int *search(Array *arr, int value);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -79,12 +83,28 @@ void set(Array *arr, size_t idx, int value)
   arr->arr[idx] = value;
 }
 
+// Returns the address of the element if found, else NULL.
+int *search(Array *arr, int value)
+{
+  for (size_t i = 0; i < arr->length; i++)
+    if (arr->arr[i] == value)
+      return &(arr->arr[i]);
+  return NULL;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
   append(array, 12);
   append(array, 14);
   printArray(array);
+
+  int *maybe12 = search(array, 12);
+  printf("Array contains 12? %d\n", maybe12 != NULL);
+  printf("address: %p, value: %d\n", maybe12, *maybe12);
+  int *maybe99 = search(array, 99);
+  printf("Array contains 99? %d\n", maybe99 != NULL);
+
   freeArray(&array);
   return 0;
 }
