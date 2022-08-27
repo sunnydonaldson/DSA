@@ -30,6 +30,7 @@ void freeArray(Array **arr);
 int get(Array *arr, size_t idx);
 void set(Array *arr, size_t idx, int value);
 int *search(Array *arr, int value);
+void insert(Array *arr, size_t idx, int value);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -92,6 +93,15 @@ int *search(Array *arr, int value)
   return NULL;
 }
 
+void insert(Array *arr, size_t idx, int value)
+{
+  assert(arr->length + 1 <= arr->size); // enough room for +1 element?
+  assert(idx <= arr->length); // index is within the currently used space
+  for (size_t i = arr->length++; i > idx; i--)
+    arr->arr[i] = arr->arr[i -1];
+  arr->arr[idx] = value;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -104,6 +114,19 @@ int main() {
   printf("address: %p, value: %d\n", maybe12, *maybe12);
   int *maybe99 = search(array, 99);
   printf("Array contains 99? %d\n", maybe99 != NULL);
+
+  printArray(array);
+  printf("insert 44 at index 2\n");
+  insert(array, 2, 44);
+  printArray(array);
+  printf("insert 22 at index 1\n");
+  insert(array, 1, 22);
+  printArray(array);
+  printf("insert 434 at index 0\n");
+  insert(array, 0, 434);
+  printArray(array);
+  // printf("insert at 100 (should fail)");
+  // insert(array, 100, 99);
 
   freeArray(&array);
   return 0;
