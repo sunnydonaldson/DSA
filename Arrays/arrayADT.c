@@ -31,6 +31,7 @@ int get(Array *arr, size_t idx);
 void set(Array *arr, size_t idx, int value);
 int *search(Array *arr, int value);
 void insert(Array *arr, size_t idx, int value);
+int delete(Array *arr, size_t idx);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -102,6 +103,16 @@ void insert(Array *arr, size_t idx, int value)
   arr->arr[idx] = value;
 }
 
+int delete(Array *arr, size_t idx)
+{
+  assert(idx < arr->length);
+  int returnValue = arr->arr[idx];
+  for (size_t i = idx; i < arr->length -1; i++)
+    arr->arr[i] = arr->arr[i+1];
+  arr->length--;
+  return returnValue;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -127,6 +138,15 @@ int main() {
   printArray(array);
   // printf("insert at 100 (should fail)");
   // insert(array, 100, 99);
+
+  printf("delete at index 0\n");
+  delete(array, 0);
+  printArray(array);
+
+  printf("delete at index 2\n");
+  delete(array, 2);
+  printArray(array);
+  // printf("delete at 99 (should fail)\n");
 
   freeArray(&array);
   return 0;
