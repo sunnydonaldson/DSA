@@ -22,6 +22,7 @@ typedef struct Array {
 void fillValues(Array *arr, int value);
 Array *instantiate(int size);
 void printArray(Array *arr);
+void append(Array *arr, int value);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(int size)
@@ -48,8 +49,17 @@ void printArray(Array *arr)
   }
 }
 
+void append(Array *arr, int value)
+{
+  assert(arr->length + 1 <= arr->size);
+  arr->arr[arr->length++] = value;
+}
+
 int main() {
   Array *array = instantiate(32);
+  printArray(array);
+  append(array, 12);
+  append(array, 14);
   printArray(array);
   return 0;
 }
