@@ -22,7 +22,7 @@ typedef struct Array {
 // it might make it clearer how typedef works.
 
 // Maybe refactor into header file...
-void fillValues(Array *arr, int value);
+void fillArray(Array *arr, int value);
 Array *instantiate(size_t size);
 void printArray(Array *arr);
 void append(Array *arr, int value);
@@ -43,11 +43,11 @@ Array *instantiate(size_t size)
   array->arr = malloc(size * sizeof(int));
   array->size = size;
   array->length = 0;
-  fillValues(array, 0);
+  fillArray(array, 0);
   return array;
 }
 
-void fillValues(Array *arr, int value)
+void fillArray(Array *arr, int value)
 {
   for (size_t i = 0; i < arr->size; i++) {
     arr->arr[i] = value;
@@ -129,7 +129,7 @@ int *moveToHeadSearch(Array *arr, int key)
   for (size_t i = 0; i < arr->length; i++) {
     if(arr->arr[i] == key) {
       swap(&(arr->arr[i]), &(arr->arr[0]));
-      return arr;
+      return arr->arr;
     }
   }
   return NULL;
@@ -140,6 +140,25 @@ static void swap(int *a, int *b)
   int tmp = *a;
   *a = *b;
   *b = tmp;
+}
+
+int binarySearch(Array *arr, int key)
+{
+  assert(arr->length >= 1);
+  size_t low = 0;
+  size_t high = arr->length -1;
+  size_t mid;
+  
+  while (low <= high) {
+    mid = (low + high) / 2;
+    if (arr->arr[mid] == key)
+      return mid;
+    else if (key < arr->arr[mid])
+      high = mid -1;
+    else
+      low = mid + 1;
+  }
+  return -1;
 }
 
 void insert(Array *arr, size_t idx, int value)
@@ -203,6 +222,14 @@ int main() {
   moveToHeadSearch(array, 22);
   printArray(array);
 
+  Array *orderedArray = instantiate(63);
+  for (int i = 0; i < orderedArray->size; i++) {
+    orderedArray->arr[i] = i * 2;
+  }
+  orderedArray->length = orderedArray->size;
+  printArray(orderedArray);
+
+  printf("\nbinar search: %d\n", binarySearch(orderedArray, 10));
   freeArray(&array);
   return 0;
 }
