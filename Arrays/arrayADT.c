@@ -229,7 +229,7 @@ int main() {
   orderedArray->length = orderedArray->size;
   printArray(orderedArray);
 
-  printf("\nbinar search: %d\n", binarySearch(orderedArray, 10));
+  printf("\nbinary search: %d\n", binarySearch(orderedArray, 10));
   freeArray(&array);
   return 0;
 }
