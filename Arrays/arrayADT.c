@@ -161,6 +161,20 @@ int binarySearch(Array *arr, int key)
   return -1;
 }
 
+int recursiveBinarySearch(Array *arr, size_t left, size_t right, int key)
+{
+  if (left > right)
+    return -1;
+
+  size_t mid = (left + right) / 2;
+  if(arr->arr[mid] == key)
+    return mid;
+  else if(key < arr->arr[mid])
+    return recursiveBinarySearch(arr, left, mid -1, key);
+  else
+    return recursiveBinarySearch(arr, mid + 1, right, key);
+}
+
 void insert(Array *arr, size_t idx, int value)
 {
   assert(arr->length + 1 <= arr->size); // enough room for +1 element?
@@ -229,7 +243,10 @@ int main() {
   orderedArray->length = orderedArray->size;
   printArray(orderedArray);
 
-  printf("\nbinary search: %d\n", binarySearch(orderedArray, 10));
+  printf("\nbinary search for 10: %d\n", binarySearch(orderedArray, 10));
+  printf("\nRecursive binary search for 14: %d\n", recursiveBinarySearch(
+    orderedArray, 0, orderedArray->length-1, 14));
   freeArray(&array);
+  freeArray(&orderedArray);
   return 0;
 }
