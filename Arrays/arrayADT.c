@@ -8,6 +8,7 @@
 #include "assert.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -35,6 +36,8 @@ int *moveToHeadSearch(Array *arr, int key);
 static void swap(int *a, int *b);
 void insert(Array *arr, size_t idx, int value);
 int delete(Array *arr, size_t idx);
+int max(Array *arr);
+int min(Array *arr);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -180,6 +183,24 @@ int delete(Array *arr, size_t idx)
   return returnValue;
 }
 
+int max(Array *arr)
+{
+  int max = arr->arr[0];
+  for (int i = 1; i < arr->length; i++ )
+    if (arr->arr[i] > max)
+      max = arr->arr[i];
+  return max;
+}
+
+int min(Array *arr)
+{
+  int min = arr->arr[0];
+  for (int i = 1; i < arr->length; i++)
+    if (arr->arr[i] < min)
+      min = arr->arr[i];
+  return min;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -230,6 +251,8 @@ int main() {
   printArray(orderedArray);
 
   printf("\nbinary search: %d\n", binarySearch(orderedArray, 10));
+  printf("min of array: %d\n", min(orderedArray));
+  printf("max of array: %d\n", max(orderedArray));
   freeArray(&array);
   return 0;
 }
