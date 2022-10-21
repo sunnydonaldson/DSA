@@ -40,6 +40,7 @@ int max(Array *arr);
 int min(Array *arr);
 int sum(Array *arr);
 double avg(Array *arr);
+void reverse(Array *arr);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -216,6 +217,15 @@ double avg(Array *arr)
   return (double) sum(arr) / arr->length;
 }
 
+void reverse(Array *arr)
+{
+  assert(arr->length > 0);
+  int tmp;
+  for (int i = 0, j = arr->length -1; i < j; i++, j--) {
+    swap(&arr->arr[i], &arr->arr[j]);
+  }
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -270,6 +280,12 @@ int main() {
   printf("max of array: %d\n", max(orderedArray));
   printf("sum of array: %d\n", sum(orderedArray));
   printf("average of array: %d\n", avg(orderedArray));
+
+  reverse(orderedArray);
+  printf("reversed array:\n");
+  printArray(orderedArray);
   freeArray(&array);
+
+
   return 0;
 }
