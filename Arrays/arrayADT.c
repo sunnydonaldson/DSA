@@ -38,6 +38,8 @@ void insert(Array *arr, size_t idx, int value);
 int delete(Array *arr, size_t idx);
 int max(Array *arr);
 int min(Array *arr);
+int sum(Array *arr);
+double avg(Array *arr);
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -201,6 +203,19 @@ int min(Array *arr)
   return min;
 }
 
+int sum(Array *arr)
+{
+  int sum = 0;
+  for (int i = 0; i < arr->length; i++)
+    sum += arr->arr[i];
+  return sum;
+}
+
+double avg(Array *arr)
+{
+  return (double) sum(arr) / arr->length;
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -253,6 +268,8 @@ int main() {
   printf("\nbinary search: %d\n", binarySearch(orderedArray, 10));
   printf("min of array: %d\n", min(orderedArray));
   printf("max of array: %d\n", max(orderedArray));
+  printf("sum of array: %d\n", sum(orderedArray));
+  printf("average of array: %d\n", avg(orderedArray));
   freeArray(&array);
   return 0;
 }
