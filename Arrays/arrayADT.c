@@ -41,6 +41,9 @@ int min(Array *arr);
 int sum(Array *arr);
 double avg(Array *arr);
 void reverse(Array *arr);
+void leftShift(Array *arr, int numToShift);
+void leftRotate(Array *arr, int numToRotate);
+
 
 // Initializes an instance of Array on the heap
 Array *instantiate(size_t size)
@@ -226,6 +229,30 @@ void reverse(Array *arr)
   }
 }
 
+void leftShift(Array *arr, int numToShift)
+{
+  if (numToShift > arr->length)
+    numToShift = arr->length;
+  for (size_t i = numToShift; i < arr->length; i++)
+    arr->arr[i - numToShift] = arr->arr[i];
+  for (size_t j = arr->length - numToShift; j < arr->length; j++)
+    arr->arr[j] = 0;
+}
+
+void leftRotate(Array *arr, int numToRotate)
+{
+  // An optimisation
+  numToRotate = numToRotate % arr->length;
+  int *tmp = malloc(arr->length * sizeof(int));
+  for (size_t i = numToRotate, j = 0; i < arr->length; i++, j++)
+    tmp[j] = arr->arr[i];
+  for (size_t i = 0, j=numToRotate; i < numToRotate; i++, j++)
+    tmp[j] = arr->arr[i];
+  for (size_t i = 0; i < arr->length; i++)
+    arr->arr[i] = tmp[i];
+  free(tmp);
+}
+
 int main() {
   Array *array = instantiate(32);
   printArray(array);
@@ -269,9 +296,8 @@ int main() {
   printArray(array);
 
   Array *orderedArray = instantiate(63);
-  for (int i = 0; i < orderedArray->size; i++) {
+  for (int i = 0; i < orderedArray->size; i++)
     orderedArray->arr[i] = i * 2;
-  }
   orderedArray->length = orderedArray->size;
   printArray(orderedArray);
 
@@ -284,8 +310,35 @@ int main() {
   reverse(orderedArray);
   printf("reversed array:\n");
   printArray(orderedArray);
-  freeArray(&array);
 
+
+  Array *smallArray = instantiate(5);
+  for (int i = 0; i < smallArray->size; i++)
+    smallArray->arr[i] = 1 + i * 2;
+  smallArray->length = smallArray->size;
+  printf("small array \n");
+  printArray(smallArray);
+  leftShift(smallArray, 2);
+  printf("after shifting left by 2: \n");
+  printArray(smallArray);
+  leftShift(smallArray, 5);
+  printf("after shifting left by 5\n");
+  printArray(smallArray);
+
+  for (int i = 0; i < smallArray->size; i++)
+    smallArray->arr[i] = 1 + i * 2;
+  printf("reset to original state:\n");
+  printArray(smallArray);
+  leftRotate(smallArray, 3);
+  printf("after left rotate 3\n");
+  printArray(smallArray);
+  leftRotate(smallArray, 1);
+  printf("after left rotate 1\n");
+  printArray(smallArray);
+  
+  freeArray(&array);
+  freeArray(&orderedArray);
+  freeArray(&smallArray);
 
   return 0;
 }
