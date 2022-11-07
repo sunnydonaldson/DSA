@@ -35,7 +35,7 @@ int *transposeSearch(Array *arr, int key);
 int *moveToHeadSearch(Array *arr, int key);
 static void swap(int *a, int *b);
 void insert(Array *arr, size_t idx, int value);
-void sortedInsert(Array *arr, size_t idx, int value);
+void sortedInsert(Array *arr, int value);
 int delete(Array *arr, size_t idx);
 int max(Array *arr);
 int min(Array *arr);
@@ -53,7 +53,6 @@ Array *instantiate(size_t size)
   array->arr = malloc(size * sizeof(int));
   array->size = size;
   array->length = 0;
-  fillArray(array, 0);
   return array;
 }
 
@@ -180,11 +179,16 @@ void insert(Array *arr, size_t idx, int value)
   arr->arr[idx] = value;
 }
 
-void sortedInsert(Array *arr, size_t idx, int value)
+void sortedInsert(Array *arr, int value)
 {
-  assert(idx > 0);
   assert(arr->length + 1 <= arr->size);
-  for (int i = arr->length; i > idx; i--);
+  int i = arr->length -1;
+  while(arr->arr[i] > value) {
+    arr->arr[i+1] = arr->arr[i];
+    i--;
+  }
+  arr->arr[i+1] = value;
+  arr->length++;
 }
 
 int delete(Array *arr, size_t idx)
@@ -304,9 +308,16 @@ int main() {
   printArray(array);
 
   Array *orderedArray = instantiate(63);
-  for (int i = 0; i < orderedArray->size; i++)
+  // -2 to leave space to exercise sortedInsert + insert
+  int i;
+  for (i = 0; i < orderedArray->size -1; i++)
     orderedArray->arr[i] = i * 2;
-  orderedArray->length = orderedArray->size;
+  orderedArray->length = i;
+  printf("ordered array\n");
+  printArray(orderedArray);
+  int numToInsert = 19;
+  printf("Insert %d into ordered array.\n", numToInsert);
+  sortedInsert(orderedArray, numToInsert);
   printArray(orderedArray);
 
   printf("\nbinary search: %d\n", binarySearch(orderedArray, 10));
@@ -321,7 +332,7 @@ int main() {
 
 
   Array *smallArray = instantiate(5);
-  for (int i = 0; i < smallArray->size; i++)
+  for (int i = 0; i < smallArray->size -2; i++)
     smallArray->arr[i] = 1 + i * 2;
   smallArray->length = smallArray->size;
   printf("small array \n");
