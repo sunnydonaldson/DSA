@@ -35,6 +35,7 @@ int *transposeSearch(Array *arr, int key);
 int *moveToHeadSearch(Array *arr, int key);
 static void swap(int *a, int *b);
 void insert(Array *arr, size_t idx, int value);
+void sortedInsert(Array *arr, size_t idx, int value);
 int delete(Array *arr, size_t idx);
 int max(Array *arr);
 int min(Array *arr);
@@ -177,6 +178,13 @@ void insert(Array *arr, size_t idx, int value)
   for (size_t i = arr->length++; i > idx; i--)
     arr->arr[i] = arr->arr[i -1];
   arr->arr[idx] = value;
+}
+
+void sortedInsert(Array *arr, size_t idx, int value)
+{
+  assert(idx > 0);
+  assert(arr->length + 1 <= arr->size);
+  for (int i = arr->length; i > idx; i--);
 }
 
 int delete(Array *arr, size_t idx)
