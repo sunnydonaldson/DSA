@@ -36,6 +36,7 @@ int *moveToHeadSearch(Array *arr, int key);
 static void swap(int *a, int *b);
 void insert(Array *arr, size_t idx, int value);
 void sortedInsert(Array *arr, int value);
+Array *mergeArrays(Array *a, Array *b);
 int delete(Array *arr, size_t idx);
 int max(Array *arr);
 int min(Array *arr);
@@ -191,6 +192,28 @@ void sortedInsert(Array *arr, int value)
   arr->length++;
 }
 
+Array *mergeArrays(Array *a, Array *b)
+{
+  Array *result = instantiate(a->length + b->length);
+  int i = 0, j = 0, x = 0;
+  while (i < a->length && j < b->length)
+  {
+    if (a->arr[i] < b->arr[j]) {
+      result->arr[x++] = a->arr[i++];
+    } else {
+      result->arr[x++] = b->arr[j++];
+    }
+  }
+  for (; i < a->length; i++)
+    result->arr[x++] = a->arr[i];
+  for (; j < b->length; j++)
+    result->arr[x++] = a->arr[j];
+  result->length = result->size;
+  freeArray(&a);
+  freeArray(&b);
+  return result;
+}
+
 int delete(Array *arr, size_t idx)
 {
   assert(idx < arr->length);
@@ -326,9 +349,21 @@ int main() {
   printf("sum of array: %d\n", sum(orderedArray));
   printf("average of array: %d\n", avg(orderedArray));
 
-  reverse(orderedArray);
+  printf("\n Other sorted array: \n");
+  Array *otherOrderedArray = instantiate(5);
+  for (i = 0; i < 5; i++)
+    otherOrderedArray->arr[i] = i * 3 + 1;
+  otherOrderedArray->length = 5;
+  printArray(otherOrderedArray);
+  printf("\nMerge sorted arrays:\n");
+  Array *result = mergeArrays(orderedArray, otherOrderedArray);
+  printArray(result);
+
+
+
+  reverse(result);
   printf("reversed array:\n");
-  printArray(orderedArray);
+  printArray(result);
 
 
   Array *smallArray = instantiate(5);
@@ -355,8 +390,8 @@ int main() {
   printf("after left rotate 1\n");
   printArray(smallArray);
   
+  freeArray(&result);
   freeArray(&array);
-  freeArray(&orderedArray);
   freeArray(&smallArray);
 
   return 0;
