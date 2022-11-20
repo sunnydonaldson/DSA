@@ -111,12 +111,18 @@ int main() {
   Array *unionResult = arrayUnion(array, result);
   printf("Union of 'array' and 'result': \n");
   printArray(unionResult);
+
+  Array *differenceResult = difference(array, result);
+  printf("difference of 'array' and 'result' (should be array - result)\n");
+  printArray(differenceResult);
+
   
   freeArray(&result);
   freeArray(&array);
   freeArray(&smallArray);
   freeArray(&intersectionResult);
   freeArray(&unionResult);
+  freeArray(&differenceResult);
 
   return 0;
 }
