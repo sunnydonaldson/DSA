@@ -14,6 +14,24 @@ Array *arrayUnion(Array *a, Array *b)
   return result;
 }
 
+// Effectively just merge, but without duplicates
+Array *sortedUnion(Array *a, Array *b)
+{
+  size_t i = 0, j = 0;
+  Array *result = instantiate(a->size + b->size);
+  while (i < a->length && j < b->length) {
+    if (a->arr[i] < b->arr[j]) {
+      append(result, a->arr[i++]);
+    } else if (a->arr[i] > b->arr[j]) {
+      append(result, b->arr[j++]);
+    } else {
+      append(result, a->arr[i]);
+      i++, j++;
+    }
+  }
+  return result;
+}
+
 // O(n * m) essentially O(n^2)
 Array *arrayIntersection(Array *a, Array *b)
 {

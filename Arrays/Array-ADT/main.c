@@ -112,6 +112,10 @@ int main() {
   printf("Union of 'array' and 'result': \n");
   printArray(unionResult);
 
+  Array *orderedUnion = sortedUnion(orderedArray, otherOrderedArray);
+  printf("union on ordered arrays: \n");
+  printArray(orderedUnion);
+
   Array *differenceResult = difference(array, result);
   printf("difference of 'array' and 'result' (should be array - result)\n");
   printArray(differenceResult);
@@ -122,6 +126,7 @@ int main() {
   freeArray(&smallArray);
   freeArray(&intersectionResult);
   freeArray(&unionResult);
+  freeArray(&orderedUnion);
   freeArray(&differenceResult);
 
   return 0;
