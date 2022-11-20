@@ -22,6 +22,7 @@ typedef struct Array {
   size_t length;
 } Array;
 
+void swap(int *a, int *b);
 void fillArray(Array *arr, int value);
 Array *instantiate(size_t size);
 void printArray(Array *arr);

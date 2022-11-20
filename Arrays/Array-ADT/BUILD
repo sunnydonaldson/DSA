@@ -3,6 +3,10 @@ cc_library(
   srcs = [
     "arrayADT.c",
     "set_operations.c",
+    "insert.c",
+    "searching.c",
+    "sorting.c",
+    "array_helpers.c",
   ],
   hdrs = [
     "arrayADT.h",
