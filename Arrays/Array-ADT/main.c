@@ -108,6 +108,10 @@ int main() {
   printf("Intersection of 'result' and 'array': \n");
   printArray(intersectionResult);
 
+  Array *sortedIntersectionResult = sortedIntersection(orderedArray, otherOrderedArray);
+  printf("Intersection of 'orderedArray' and 'otherOrderedArray' \n");
+  printArray(sortedIntersectionResult);
+
   Array *unionResult = arrayUnion(array, result);
   printf("Union of 'array' and 'result': \n");
   printArray(unionResult);
@@ -125,6 +129,7 @@ int main() {
   freeArray(&array);
   freeArray(&smallArray);
   freeArray(&intersectionResult);
+  freeArray(&sortedIntersectionResult);
   freeArray(&unionResult);
   freeArray(&orderedUnion);
   freeArray(&differenceResult);

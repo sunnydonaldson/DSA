@@ -4,7 +4,6 @@
 Array *arrayUnion(Array *a, Array *b)
 {
   Array *result = instantiate(a->length + b->length);
-  printf("result length %zu\n", result->length);
   for (size_t i = 0; i < a->length; i++)
     append(result, a->arr[i]);
 
@@ -29,6 +28,11 @@ Array *sortedUnion(Array *a, Array *b)
       i++, j++;
     }
   }
+
+  for (; i < a->length; i++)
+    append(result, a->arr[i]);
+  for(; j < b->length; j++)
+    append(result, b->arr[j]);
   return result;
 }
 
@@ -39,6 +43,23 @@ Array *arrayIntersection(Array *a, Array *b)
   for (size_t i = 0; i < a->length; i++)
     if (search(b, a->arr[i]) != NULL)
       append(result, a->arr[i]);
+  return result;
+}
+
+Array *sortedIntersection(Array *a, Array *b)
+{
+  Array *result = instantiate(a->length + b->length);
+  size_t i = 0, j = 0;
+  while (i < a->length && j < b->length) {
+    if (a->arr[i] < b->arr[j]) {
+      i++;
+    } else if (a->arr[i] > b->arr[j]) {
+      j++;
+    } else {
+      append(result, a->arr[i]);
+      i++, j++;
+    }
+  }
   return result;
 }
 

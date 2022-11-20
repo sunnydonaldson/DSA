@@ -47,6 +47,7 @@ void reverse(Array *arr);
 void leftShift(Array *arr, int numToShift);
 void leftRotate(Array *arr, int numToRotate);
 Array *arrayIntersection(Array *a, Array *b);
+Array *sortedIntersection(Array *a, Array *b);
 Array *arrayUnion(Array *a, Array *b);
 Array *sortedUnion(Array *a, Array *b);
 Array *difference(Array *a, Array *b);
