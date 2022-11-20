@@ -51,5 +51,6 @@ Array *sortedIntersection(Array *a, Array *b);
 Array *arrayUnion(Array *a, Array *b);
 Array *sortedUnion(Array *a, Array *b);
 Array *difference(Array *a, Array *b);
+Array *sortedDifference(Array *a, Array *b);
 
 #endif

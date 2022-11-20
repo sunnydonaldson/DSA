@@ -67,9 +67,30 @@ Array *sortedIntersection(Array *a, Array *b)
 // O(n * m) essentially O(n^2)
 Array *difference(Array *a, Array *b)
 {
-  Array *result = instantiate(a->length + b->length);
+  Array *result = instantiate(a->length);
   for (int i = 0; i < a->length; i++)
     if (search(b, a->arr[i] == NULL))
        append(result, a->arr[i]);
   return result;
 }
+
+Array *sortedDifference(Array *a, Array *b)
+{
+  size_t i = 0, j = 0;
+  Array *result = instantiate(a->length);
+
+  while (i < a->length && j < b->length) {
+    if (a->arr[i] < b->arr[j]) {
+      append(result, a->arr[i++]);
+    } else if (a->arr[i] < b->arr[j]) {
+      j++;
+    } else {
+      j++, i++;
+    }
+
+    for (; i < a->length; i++)
+      append(result, a->arr[i]);
+    return result;
+  }
+}
+

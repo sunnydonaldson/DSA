@@ -124,6 +124,10 @@ int main() {
   printf("difference of 'array' and 'result' (should be array - result)\n");
   printArray(differenceResult);
 
+  Array *sortedDifferenceResult = sortedDifference(orderedArray, otherOrderedArray);
+  printf("difference of 'orderedArray' and 'otherOrderedArray'\n");
+  printArray(sortedDifferenceResult);
+
   
   freeArray(&result);
   freeArray(&array);
@@ -133,6 +137,9 @@ int main() {
   freeArray(&unionResult);
   freeArray(&orderedUnion);
   freeArray(&differenceResult);
+  freeArray(&sortedDifferenceResult);
+  freeArray(&orderedArray);
+  freeArray(&otherOrderedArray);
 
   return 0;
 }

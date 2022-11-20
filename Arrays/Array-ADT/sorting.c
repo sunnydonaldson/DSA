@@ -17,8 +17,6 @@ Array *mergeArrays(Array *a, Array *b)
   for (; j < b->length; j++)
     result->arr[x++] = a->arr[j];
   result->length = result->size;
-  freeArray(&a);
-  freeArray(&b);
   return result;
 }
 
