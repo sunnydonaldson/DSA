@@ -46,6 +46,7 @@ double avg(Array *arr);
 void reverse(Array *arr);
 void leftShift(Array *arr, int numToShift);
 void leftRotate(Array *arr, int numToRotate);
+Array *intersection(Array *a, Array *b);
 
 
 // Initializes an instance of Array on the heap
@@ -295,6 +296,19 @@ void leftRotate(Array *arr, int numToRotate)
   for (size_t i = 0; i < arr->length; i++)
     arr->arr[i] = tmp[i];
   free(tmp);
+}
+
+Array *intersection(Array *a, Array *b)
+{
+  Array *result = instantiate(a->length + b->length);
+  printf("result length %d\n", result->length);
+  for (int i = 0; i < a->length; i++)
+    result->arr[length++] = a->arr[i];
+
+  for (int i = 0; i < b->length; i++)
+    if (search(result, b->arr[i]) == NULL)
+      result->arr[result->length++] = b->arr[i];
+  return result;
 }
 
 int main() {
