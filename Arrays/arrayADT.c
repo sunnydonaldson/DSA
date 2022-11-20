@@ -37,6 +37,7 @@ static void swap(int *a, int *b);
 void insert(Array *arr, size_t idx, int value);
 void sortedInsert(Array *arr, int value);
 Array *mergeArrays(Array *a, Array *b);
+int isSorted(Array *a);
 int delete(Array *arr, size_t idx);
 int max(Array *arr);
 int min(Array *arr);
@@ -214,6 +215,14 @@ Array *mergeArrays(Array *a, Array *b)
   return result;
 }
 
+int isSorted(Array *a)
+{
+  for (int i = 1; i < a->length; i++)
+    if (a->arr[i] < a->arr[i - 1])
+      return FALSE;
+  return TRUE;
+}
+
 int delete(Array *arr, size_t idx)
 {
   assert(idx < arr->length);
@@ -347,7 +356,7 @@ int main() {
   printf("min of array: %d\n", min(orderedArray));
   printf("max of array: %d\n", max(orderedArray));
   printf("sum of array: %d\n", sum(orderedArray));
-  printf("average of array: %d\n", avg(orderedArray));
+  printf("average of array: %f\n", avg(orderedArray));
 
   printf("\n Other sorted array: \n");
   Array *otherOrderedArray = instantiate(5);
@@ -358,6 +367,7 @@ int main() {
   printf("\nMerge sorted arrays:\n");
   Array *result = mergeArrays(orderedArray, otherOrderedArray);
   printArray(result);
+  printf("merged array isSorted? %d\n", isSorted(result));
 
 
 
