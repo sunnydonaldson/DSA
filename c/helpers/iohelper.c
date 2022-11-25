@@ -38,11 +38,10 @@ void printStack2DIntArray(int *arr, int rows, int cols)
   }
 }
 
-void printHeap2DIntArray(int **arr, int rows, int cols) {
+void print2DIntArray(int **arr, int rows, int cols) {
   for (int rowIdx = 0; rowIdx < rows; rowIdx++) {
     for (int colIdx = 0; colIdx < cols; colIdx++) {
       printf("[%d][%d] = %d\n", rowIdx, colIdx, arr[rowIdx][colIdx]);
     }
   }
-
 }

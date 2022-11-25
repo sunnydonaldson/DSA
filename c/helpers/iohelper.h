@@ -7,7 +7,7 @@
 int *getUserInts(int numInts);
 int getUserInt();
 void printIntArray(int *arr, int size);
-void print2DIntArray(int *arr, int rows, int cols);
+void print2DIntArray(int **arr, int rows, int cols);
 
 #endif
 

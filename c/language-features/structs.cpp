@@ -25,7 +25,7 @@ int calcAreaPassByReference(struct Rectangle &r) {
   return r.length * r.width;
 }
 
-int passStructByValueWithArrayMember(struct Octagon shape) {
+void passStructByValueWithArrayMember(struct Octagon shape) {
   // Arrays can normally only be passed by address
   // But because the struct is being passed by value, a special exception has to be made
   // So array members of structs get passed by value, if the struct gets passed by value.
@@ -33,7 +33,7 @@ int passStructByValueWithArrayMember(struct Octagon shape) {
   std::cout << "changing the lengths inside the pass by value function: " << shape.lengths[0] << std::endl;
 }
 
-int passStructByReferenceWithArrayMember(struct Octagon &shape) {
+void passStructByReferenceWithArrayMember(struct Octagon &shape) {
   // In this case, since the struct was passed by reference, the array won't be copied.
   // It'll be passed as a pointer to the first element of the array (like normal)
   std::cout << "inside a method where the struct was passed by reference" << std::endl;

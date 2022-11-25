@@ -65,7 +65,7 @@ void arrayOfPointers()
   for (int i = 0; i < rows; i++) {
     example[i] = malloc(cols * sizeof(int));
   }
-  print2dArray(example, rows, cols);
+  print2DIntArray(example, rows, cols);
 
 }
 

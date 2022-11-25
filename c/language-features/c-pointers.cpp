@@ -1,4 +1,5 @@
 #include<stdlib.h>
+#include<stdio.h>
 
 struct Rectangle {
   int width;
@@ -28,7 +29,7 @@ void references() {
   int a = 5;
   // Use & when declaring a reference
   int &myRef = a;
-  
+  printf("%d", myRef);
 }
 
 void pointerToStruct() {
