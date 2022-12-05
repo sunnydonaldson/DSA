@@ -3,6 +3,7 @@
 void findMissingElementsFromSequence(Array *sequence)
 {
     assert(sequence->length >= 2);
+    printf("find missing elements from ordered sequence:\n");
     int expectedDifference = 1;
     for (size_t i = 0; i < sequence->length -1; i++) {
         while (sequence->arr[i] + expectedDifference != sequence->arr[i +1])
@@ -10,6 +11,25 @@ void findMissingElementsFromSequence(Array *sequence)
         expectedDifference = 1;
     }
 }
+
+void findMissingElementsUnorderedSequence(Array *sequence)
+{
+  printf("find missing element from unordered sequence\n");
+  // This technique is essentially hashing.
+  // We need an index in our "hash table" for every number, so find the boundaries.
+  int largest = max(sequence);
+
+  Array *bitset = instantiate(largest);
+  // 0 for numbers that we haven't found in the sequence
+  fillArray(sequence, FALSE);
+  
+  for (size_t i = 0; i < sequence->length; i++)
+    bitset->arr[i] = TRUE;
+  for (size_t i = 0; i < bitset->length; i++)
+    if (bitset->arr[i] == FALSE)
+        printf("%zu not in sequence\n", i);
+}
+
 int main()
 {
     Array *sequence = instantiate(10);
@@ -19,7 +39,9 @@ int main()
     sequence->arr[sequence->size -2] = 20;
     sequence->arr[sequence->size -1] = 21;
     sequence->length = sequence->size;
-    findSingleMissingElementFromSequence(sequence);
+    findMissingElementsFromSequence(sequence);
+    findMissingElementsUnorderedSequence(sequence);
+
     freeArray(&sequence);
 
     return 0;
