@@ -18,14 +18,15 @@ void findMissingElementsUnorderedSequence(Array *sequence)
   // This technique is essentially hashing.
   // We need an index in our "hash table" for every number, so find the boundaries.
   int largest = max(sequence);
-
   Array *bitset = instantiate(largest);
-  // 0 for numbers that we haven't found in the sequence
-  fillArray(sequence, FALSE);
+  // FALSE (0) for numbers that we haven't found in the sequence
+  fillArray(bitset, FALSE);
   
   for (size_t i = 0; i < sequence->length; i++)
-    bitset->arr[i] = TRUE;
-  for (size_t i = 0; i < bitset->length; i++)
+    bitset->arr[sequence->arr[i]] = TRUE;
+
+  int smallest = min(sequence);
+  for (size_t i = smallest; i < bitset->length; i++)
     if (bitset->arr[i] == FALSE)
         printf("%zu not in sequence\n", i);
 }

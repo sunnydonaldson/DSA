@@ -15,6 +15,7 @@ void fillArray(Array *arr, int value)
   for (size_t i = 0; i < arr->size; i++) {
     arr->arr[i] = value;
   }
+  arr->length = arr->size;
 }
 
 void printArray(Array *arr)
