@@ -12,3 +12,9 @@ cc_binary(
   srcs = ["2dArrays.c"],
   deps = ["//c/helpers:io_helper"],
 )
+
+cc_binary(
+  name = "array_challenges",
+  srcs = ["array-challenges.c"],
+  deps = ["//c/Arrays/Array-ADT:array_adt"],
+)
