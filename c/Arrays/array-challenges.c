@@ -31,6 +31,21 @@ void findMissingElementsUnorderedSequence(Array *sequence)
         printf("%zu not in sequence\n", i);
 }
 
+findDuplicatesInSortedArray(Array *array)
+{
+    printf("\nfind duplicates in sorted array\n");
+    assert(array->length >= 1);
+    size_t j = 0;
+    for (size_t i = 0; i < array->length -1; i++) {
+        if (array->arr[i] == array->arr[i + 1]) {
+            j = i + 1;
+            while (array->arr[i] == array->arr[j]) j++;
+            printf("%d repeated %zu times\n", array->arr[i], j - i);
+            i = j - 1;
+        }
+    }
+}
+
 int main()
 {
     Array *sequence = instantiate(10);
@@ -42,8 +57,17 @@ int main()
     sequence->length = sequence->size;
     findMissingElementsFromSequence(sequence);
     findMissingElementsUnorderedSequence(sequence);
-
     freeArray(&sequence);
+
+    Array *sortedWithDuplicates = instantiate(10);
+    fillArray(sortedWithDuplicates, 3);
+    for (int i = 5; i < sortedWithDuplicates->size; i++) {
+        sortedWithDuplicates->arr[i] = i;
+    }
+    sortedWithDuplicates->arr[9] = 8;
+    printArray(sortedWithDuplicates);
+    findDuplicatesInSortedArray(sortedWithDuplicates);
+
 
     return 0;
 }
