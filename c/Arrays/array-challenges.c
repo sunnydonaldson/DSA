@@ -62,6 +62,28 @@ void findDuplicatesInUnsortedArray(Array *input)
     freeArray(&table);
 }
 
+void findPairWithSumK(Array *arr, int k)
+{
+    printf("Find pair with sum %d\n", k);
+    Array *hashTable = instantiate(max(arr));
+    fillArray(hashTable, 0);
+
+    for (int i = 0; i < arr->length; i++) {
+        int currentVal = arr->arr[i];
+        int neededVal = k - currentVal;
+        if (k - currentVal < 0)
+            continue;
+        if (hashTable->arr[neededVal] == TRUE) {
+            printf("%d and %d sum to %d.\n", currentVal, neededVal, k);
+            return;
+        }
+        hashTable->arr[currentVal] = TRUE;
+    }
+    // printf("hashtable:\n");
+    // printArray(hashTable);
+    freeArray(hashTable);
+}
+
 int main()
 {
     Array *sequence = instantiate(10);
@@ -95,5 +117,13 @@ int main()
 
     findDuplicatesInUnsortedArray(unsortedWithDuplicates);
     freeArray(&unsortedWithDuplicates);
+
+    Array *arr = instantiate(20);
+    for (size_t i = 0; i < arr->size; i++)
+        arr->arr[i] = (1 + i) * 2;
+    arr->length = arr->size;
+    printArray(arr);
+    findPairWithSumK(arr, 6);
+    freeArray(&arr);
     return 0;
 }
