@@ -27,6 +27,7 @@ void fillArray(Array *arr, int value);
 Array *instantiate(size_t size);
 void printArray(Array *arr);
 void append(Array *arr, int value);
+void resize(Array *arr);
 void freeArray(Array **arr);
 int get(Array *arr, size_t idx);
 void set(Array *arr, size_t idx, int value);

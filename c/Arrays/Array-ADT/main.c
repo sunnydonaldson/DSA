@@ -97,6 +97,9 @@ int main() {
     smallArray->arr[i] = 1 + i * 2;
   printf("reset to original state:\n");
   printArray(smallArray);
+  printf("Append extra element (should cause resize):");
+  append(smallArray, 12);
+
   leftRotate(smallArray, 3);
   printf("after left rotate 3\n");
   printArray(smallArray);

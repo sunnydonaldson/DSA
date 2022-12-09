@@ -9,7 +9,8 @@
 
 void append(Array *arr, int value)
 {
-  assert(arr->length + 1 <= arr->size);
+  if (arr->length + 1 >= arr->size)
+    resize(arr);
   arr->arr[arr->length++] = value;
 }
 
@@ -98,5 +99,14 @@ void leftRotate(Array *arr, int numToRotate)
   for (size_t i = 0; i < arr->length; i++)
     arr->arr[i] = tmp[i];
   free(tmp);
+}
+
+void resize(Array *arr) {
+  arr->size = arr->size * 2;
+  int *tmp = malloc(arr->size * sizeof(int));
+  for (size_t i = 0; i < arr->length; i++)
+    tmp[i] = arr->arr[i];
+  free(arr->arr);
+  arr->arr = tmp;
 }
 
