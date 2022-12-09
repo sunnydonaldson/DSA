@@ -79,9 +79,23 @@ void findPairWithSumK(Array *arr, int k)
         }
         hashTable->arr[currentVal] = TRUE;
     }
-    // printf("hashtable:\n");
-    // printArray(hashTable);
     freeArray(hashTable);
+}
+
+void findPairWithSumKInSortedList(Array *arr, int k)
+{
+    printf("Find pair in sorted list\n");
+    size_t i = 0, j = arr->length -1;
+    int currentSum;
+    while (i < j) {
+        currentSum = arr->arr[i] + arr->arr[j];
+        if (currentSum == k)
+            printf("%d + %d sum to %d.\n", arr->arr[i++], arr->arr[j++], k);
+        else if (currentSum < k)
+            i++;
+        else if (currentSum > k)
+            j--;
+    }
 }
 
 int main()
@@ -124,6 +138,7 @@ int main()
     arr->length = arr->size;
     printArray(arr);
     findPairWithSumK(arr, 6);
+    findPairWithSumKInSortedList(arr, 6);
     freeArray(&arr);
     return 0;
 }
