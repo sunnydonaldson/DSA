@@ -22,12 +22,6 @@ static void instantiatingStrings()
 
 static void readingFromStdin()
 {
-    // scanf reads a single word.
-    printf("enter a word:\n");
-    char word[31];
-    scanf("%s", word);
-    printf("word: %s\n", word);
-
     // getline reads until newline.
     // It dynamically allocates extra memory, up to a specified cap.
     // This is safer than gets, which just naively reads forever.
@@ -37,11 +31,25 @@ static void readingFromStdin()
     ssize_t chars_read = getline(&line, &size, stdin);
     printf("line: %s\n", line);
 
+    // scanf reads a single word.
+    printf("enter a word:\n");
+    char word[31];
+    scanf("%s", word);
+    printf("word: %s\n", word);
+}
+
+static size_t length(char str[])
+{
+    size_t i;
+    for (i = 0; str[i] != '\0'; i++);
+    return i;
 }
 
 int main()
 {
     instantiatingStrings();
     readingFromStdin();
+    char str[] = "bacon";
+    printf("length of %s: %zu\n", str, length(str));
     return 0;
 }
