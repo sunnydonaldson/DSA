@@ -23,5 +23,9 @@ int main() {
     trim(string_with_spaces);
     printf("%s\n", string_with_spaces);
 
+    char multi_words[] = "  multiple words in a string  ";
+    printf("count words in %s:\n", multi_words);
+    printf("%d\n", count_words(multi_words));
+
     return 0;
 }

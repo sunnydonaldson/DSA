@@ -47,18 +47,28 @@ void trim(char str[])
     if  (count > 0 || right_count > 0) {
         for (i = count; i < length - right_count; i++)
             str[i - count] = str[i];
-        str[i] = '\0';
+        str[i - count] = '\0';
     }
 
 
 }
 
-int is_uppercase(char c)
+int count_words(char str[])
+{
+    trim(str);
+    int space_count = 0;
+    for (int i = 0; i < length_str(str); i++)
+        if (str[i] == ' ')
+            space_count++;
+    return space_count + 1;
+}
+
+static int is_uppercase(char c)
 {
     return c >= 65 && c <= 90;
 }
 
-int is_lowercase(char c)
+static int is_lowercase(char c)
 {
     return c >= 97 && c <= 122;
 }
