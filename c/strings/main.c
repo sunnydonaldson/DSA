@@ -17,5 +17,11 @@ int main() {
     printf("toggle_case(%s) = ", camelStr);
     toggle_case(camelStr);
     printf("%s\n", camelStr);
+
+    char string_with_spaces[] = "  a spaced string  ";
+    printf("trim '%s'\n", string_with_spaces);
+    trim(string_with_spaces);
+    printf("%s\n", string_with_spaces);
+
     return 0;
 }

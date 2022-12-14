@@ -5,4 +5,5 @@ int length_str(char str[]);
 void to_uppercase(char str[]);
 void to_lowercase(char str[]);
 void toggle_case(char str[]);
+void trim(char str[]);
 #endif

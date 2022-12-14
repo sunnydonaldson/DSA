@@ -36,6 +36,23 @@ void toggle_case(char str[])
     }
 }
 
+void trim(char str[])
+{
+    int length = length_str(str);
+    int count;
+    int right_count;
+    int i;
+    for (count = 0; str[count] == '\n' || str[count] == ' '; count++);
+    for (right_count = 0; str[length - right_count] == '\n' || str[length - right_count] == ' '; right_count++);
+    if  (count > 0 || right_count > 0) {
+        for (i = count; i < length - right_count; i++)
+            str[i - count] = str[i];
+        str[i] = '\0';
+    }
+
+
+}
+
 int is_uppercase(char c)
 {
     return c >= 65 && c <= 90;
