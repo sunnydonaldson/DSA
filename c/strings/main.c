@@ -21,7 +21,7 @@ int main() {
     char string_with_spaces[] = "  a spaced string  ";
     printf("trim '%s'\n", string_with_spaces);
     trim(string_with_spaces);
-    printf("%s\n", string_with_spaces);
+    printf("'%s'\n", string_with_spaces);
 
     char multi_words[] = "  multiple words in a string  ";
     printf("count words in %s:\n", multi_words);

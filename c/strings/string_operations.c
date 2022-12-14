@@ -43,7 +43,7 @@ void trim(char str[])
     int right_count;
     int i;
     for (count = 0; str[count] == '\n' || str[count] == ' '; count++);
-    for (right_count = 0; str[length - right_count] == '\n' || str[length - right_count] == ' '; right_count++);
+    for (right_count = 0; str[length - right_count -1] == '\n' || str[length - right_count -1] == ' '; right_count++);
     if  (count > 0 || right_count > 0) {
         for (i = count; i < length - right_count; i++)
             str[i - count] = str[i];
@@ -58,7 +58,7 @@ int count_words(char str[])
     trim(str);
     int space_count = 0;
     for (int i = 0; i < length_str(str); i++)
-        if (str[i] == ' ')
+        if (str[i] == ' ' && str[i -1] != ' ')
             space_count++;
     return space_count + 1;
 }
