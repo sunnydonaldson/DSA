@@ -63,6 +63,16 @@ int count_words(char str[])
     return space_count + 1;
 }
 
+void reverse(char str[])
+{
+    char tmp;
+    for (int i = 0, j = length_str(str) -1; i < j; i++, j--) {
+        tmp = str[i];
+        str[i] = str[j];
+        str[j] = tmp;
+    }
+}
+
 static int is_uppercase(char c)
 {
     return c >= 65 && c <= 90;

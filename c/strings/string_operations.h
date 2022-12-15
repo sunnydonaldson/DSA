@@ -7,4 +7,5 @@ void to_lowercase(char str[]);
 void toggle_case(char str[]);
 void trim(char str[]);
 int count_words(char str[]);
+void reverse(char str[]);
 #endif

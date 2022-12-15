@@ -27,5 +27,9 @@ int main() {
     printf("count words in %s:\n", multi_words);
     printf("%d\n", count_words(multi_words));
 
+    printf("Reverse %s:\n", multi_words);
+    reverse(multi_words);
+    printf("%s\n", multi_words);
+
     return 0;
 }
