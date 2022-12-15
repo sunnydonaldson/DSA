@@ -8,4 +8,5 @@ void toggle_case(char str[]);
 void trim(char str[]);
 int count_words(char str[]);
 void reverse(char str[]);
+int compare(char A[], char B[]);
 #endif

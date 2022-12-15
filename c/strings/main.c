@@ -31,5 +31,11 @@ int main() {
     reverse(multi_words);
     printf("%s\n", multi_words);
 
+    char bacon[] = "bacon";
+    printf("compare %s and %s.\n", bacon, bacon);
+    printf("%d\n", compare(bacon, bacon));
+
+    printf("compare cheese and cheetah: %d\n", compare("cheese", "cheetah"));
+
     return 0;
 }

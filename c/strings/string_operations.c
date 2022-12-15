@@ -73,6 +73,25 @@ void reverse(char str[])
     }
 }
 
+/** Returns -1 if the first string is greater than the second, 0 if equal, 1 if greater. */
+int compare(char A[], char B[])
+{
+    int i;
+    for (i = 0; A[i] != '\0' && B[i] != '\0'; i++) {
+        if (A[i] != B[i]) {
+            break;
+        }
+    }
+
+    if (A[i] == B[i]) {
+        return 0;
+    } else if (A[i] < B[i]) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
 static int is_uppercase(char c)
 {
     return c >= 65 && c <= 90;
