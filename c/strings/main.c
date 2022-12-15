@@ -37,5 +37,8 @@ int main() {
 
     printf("compare cheese and cheetah: %d\n", compare("cheese", "cheetah"));
 
+    char pallindrome[] = "madam";
+    printf("is %s a pallindrome?\n%d\n", pallindrome, IsPallindrome(pallindrome));
+
     return 0;
 }

@@ -92,6 +92,16 @@ int compare(char A[], char B[])
     }
 }
 
+int IsPallindrome(char arr[])
+{
+    for (int i = 0, j = length_str(arr) -1; i < j; i++, j--) {
+        if (arr[i] != arr[j]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 static int is_uppercase(char c)
 {
     return c >= 65 && c <= 90;
