@@ -1,4 +1,6 @@
 #include "string_operations.h"
+#include "../helpers/arrayhelper.h"
+#include <stdio.h>
 
 static int is_uppercase(char c);
 static int is_lowercase(char c);
@@ -100,6 +102,21 @@ int IsPallindrome(char arr[])
         }
     }
     return 1;
+}
+
+/** Prints the duplicated characters. */
+void FindDuplicates(char str[])
+{
+  trim(str);
+  int char_counts[122];
+  fillValues(char_counts, 122, 0);
+
+  for (int i = 0; str[i] != '\0'; i++) {
+    if (char_counts[str[i]] > 0) {
+      printf("%c duplicated at %i\n", str[i], i);
+    }
+    char_counts[str[i]]++;
+  }
 }
 
 static int is_uppercase(char c)

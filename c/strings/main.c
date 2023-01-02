@@ -39,6 +39,9 @@ int main() {
 
     char pallindrome[] = "madam";
     printf("is %s a pallindrome?\n%d\n", pallindrome, IsPallindrome(pallindrome));
+    printf("Find duplicates:\n");
+    FindDuplicates(pallindrome);
+    
 
     return 0;
 }

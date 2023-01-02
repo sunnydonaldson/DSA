@@ -11,5 +11,6 @@ cc_binary(
 cc_library(
     name = "string_operations",
     srcs = ["string_operations.c"],
+    deps = [ "//c/helpers:array_helper"],
     hdrs = ["string_operations.h"],
 )
