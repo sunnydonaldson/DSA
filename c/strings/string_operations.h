@@ -11,4 +11,5 @@ void reverse(char str[]);
 int compare(char A[], char B[]);
 int IsPallindrome(char arr[]);
 void FindDuplicates(char str[]);
+void FindDuplicatesBitManipulation(char str[]);
 #endif

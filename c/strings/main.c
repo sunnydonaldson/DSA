@@ -41,6 +41,8 @@ int main() {
     printf("is %s a pallindrome?\n%d\n", pallindrome, IsPallindrome(pallindrome));
     printf("Find duplicates:\n");
     FindDuplicates(pallindrome);
+    printf("Find duplicates using bit manipulation:\n");
+    FindDuplicatesBitManipulation(pallindrome);
     
 
     return 0;

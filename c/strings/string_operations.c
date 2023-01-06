@@ -1,6 +1,7 @@
 #include "string_operations.h"
 #include "../helpers/arrayhelper.h"
 #include <stdio.h>
+#include <assert.h>
 
 static int is_uppercase(char c);
 static int is_lowercase(char c);
@@ -116,6 +117,22 @@ void FindDuplicates(char str[])
       printf("%c duplicated at %i\n", str[i], i);
     }
     char_counts[str[i]]++;
+  }
+}
+
+/** Prints the duplicated characters. */
+void FindDuplicatesBitManipulation(char str[])
+{
+  long int seenValues = 0;
+
+  for (int i = 0; str[i] != '\0'; i++) {
+    assert(str[i] >= 97 && str[i] <= 122);
+    long int mask = 1;
+    mask = mask << (str[i] - 97);
+    if (seenValues & mask) {
+      printf("%c duplicated at %d\n", str[i], i);
+    }
+    seenValues = seenValues | mask;
   }
 }
 
