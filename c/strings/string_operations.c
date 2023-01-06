@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-static int is_uppercase(char c);
-static int is_lowercase(char c);
+static int IsUppercase(char c);
+static int IsLowercase(char c);
 
 int length_str(char str[])
 {
@@ -16,7 +16,7 @@ int length_str(char str[])
 void to_uppercase(char str[])
 {
     for (int i = 0; str[i] != '\0'; i++) {
-        if (is_lowercase(str[i]))
+        if (IsLowercase(str[i]))
             str[i] = str[i] - 32;
     }
 }
@@ -24,7 +24,7 @@ void to_uppercase(char str[])
 void to_lowercase(char str[])
 {
     for (int i = 0; str[i] != '\0'; i++) {
-        if (is_uppercase(str[i]))
+        if (IsUppercase(str[i]))
             str[i] = str[i] + 32;
     }
 }
@@ -32,9 +32,9 @@ void to_lowercase(char str[])
 void toggle_case(char str[])
 {
     for (int i = 0; str[i] != '\0'; i++) {
-        if (is_lowercase(str[i]))
+        if (IsLowercase(str[i]))
             str[i] = str[i] - 32;
-        else if (is_uppercase(str[i]))
+        else if (IsUppercase(str[i]))
             str[i] = str[i] + 32;
     }
 }
@@ -105,6 +105,21 @@ int IsPallindrome(char arr[])
     return 1;
 }
 
+int IsAnagram(char A[], char B[])
+{
+  to_lowercase(A);
+  to_lowercase(B);
+  int i;
+  int seenChars = int[26];
+  fillValues(seenChars, 26, 0);
+  for (i = 0; str[i] != '\0'; i++) {
+    assert(IsAlphaNumeric(str[i]));
+    if (seenChars[str[i] - 97] > 0) {
+      printf("\n");
+    }
+  }
+}
+
 /** Prints the duplicated characters. */
 void FindDuplicates(char str[])
 {
@@ -136,12 +151,17 @@ void FindDuplicatesBitManipulation(char str[])
   }
 }
 
-static int is_uppercase(char c)
+static int IsUppercase(char c)
 {
     return c >= 65 && c <= 90;
 }
 
-static int is_lowercase(char c)
+static int IsLowercase(char c)
 {
     return c >= 97 && c <= 122;
+}
+
+static int IsAlphaNumeric(char c)
+{
+  return IsLowercase(c) || IsUppercase(c);
 }
