@@ -105,19 +105,28 @@ int IsPallindrome(char arr[])
     return 1;
 }
 
+/** Returns true if the two strings are anagrams. */
 int IsAnagram(char A[], char B[])
 {
-  to_lowercase(A);
-  to_lowercase(B);
   int i;
-  int seenChars = int[26];
-  fillValues(seenChars, 26, 0);
-  for (i = 0; str[i] != '\0'; i++) {
-    assert(IsAlphaNumeric(str[i]));
-    if (seenChars[str[i] - 97] > 0) {
-      printf("\n");
+  int seenChars[122];
+  fillValues(seenChars, 122, 0);
+  for (i = 0; A[i] != '\0'; i++) {
+    seenChars[A[i]]++;
+  }
+
+  for (int j = 0; B[j] != '\0'; j++) {
+    if (j > i || --seenChars[B[j]] < 0) {
+      return 0;
+    } 
+  }
+
+  for (int i = 0; i < 122; i++) {
+    if (seenChars[i] != 0) {
+      return 0;
     }
   }
+  return 1;
 }
 
 /** Prints the duplicated characters. */

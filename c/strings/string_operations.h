@@ -10,7 +10,7 @@ int count_words(char str[]);
 void reverse(char str[]);
 int compare(char A[], char B[]);
 int IsPallindrome(char arr[]);
-int IsAnagram(char str[]);
+int IsAnagram(char A[], char B[]);
 void FindDuplicates(char str[]);
 void FindDuplicatesBitManipulation(char str[]);
 #endif

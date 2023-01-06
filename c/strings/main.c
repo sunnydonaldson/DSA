@@ -43,6 +43,8 @@ int main() {
     FindDuplicates(pallindrome);
     printf("Find duplicates using bit manipulation:\n");
     FindDuplicatesBitManipulation(pallindrome);
+
+    printf("%s and %s are anagrams? %d\n", pallindrome, pallindrome, IsAnagram(pallindrome, pallindrome));
     
 
     return 0;
