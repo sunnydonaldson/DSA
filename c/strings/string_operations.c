@@ -160,6 +160,44 @@ void FindDuplicatesBitManipulation(char str[])
   }
 }
 
+/** Prints all the permutations of a string of max size 10.
+ *
+* Uses a state-space tree to represent all the possible permutations.
+*/
+void DisplayPermutations(char str[], int startIdx)
+{
+  static int indexIsVisited[10] = {0};
+  static char result[10];
+
+  if (str[startIdx] == '\0') {
+    result[startIdx] = '\0';
+    printf("%s", result);
+    return;
+  }
+  for (int i = 0; str[i] != '\0'; i++) {
+    if(indexIsVisited[i] == 1) {
+      continue
+    }
+    result[startIdx] = str[i];
+    indexIsVisited[i] = 1;
+    DislplayPermutations(str, startIdx++);
+    indexIsVisited[i] = 0;
+  }
+}
+
+void DisplayPermutationsWithSwapping(char str[], int low, int high)
+{
+  if (l == h) {
+    printf("%s", str);
+    return;
+  }
+  for (int i = 0; i < h; i++) {
+    swap(str, l, i);
+    DisplayPermutationsWithSwapping(str, low + 1, high);
+    swap(str, l, i);
+  }
+}
+
 static int IsUppercase(char c)
 {
     return c >= 65 && c <= 90;
@@ -173,4 +211,10 @@ static int IsLowercase(char c)
 static int IsAlphaNumeric(char c)
 {
   return IsLowercase(c) || IsUppercase(c);
+}
+
+static void swap(char str[], int a, int b) {
+  char tmp = str[a];
+  str[a] = str[b];
+  str[b] = tmp;
 }

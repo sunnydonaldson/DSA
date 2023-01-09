@@ -14,4 +14,5 @@ int IsAnagram(char A[], char B[]);
 void FindDuplicates(char str[]);
 void FindDuplicatesBitManipulation(char str[]);
 void DisplayPermutations(char str[], int startIdx);
+void DisplayPermutationsWithSwapping(char str[], int low, int high);
 #endif
