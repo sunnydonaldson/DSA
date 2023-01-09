@@ -45,6 +45,10 @@ int main() {
     FindDuplicatesBitManipulation(pallindrome);
 
     printf("%s and %s are anagrams? %d\n", pallindrome, pallindrome, IsAnagram(pallindrome, pallindrome));
+
+    char smallStr[] = "abcd";
+    printf("permutations of %s", smallStr);
+    DisplayPermutations(smallStr, 0);
     
 
     return 0;
