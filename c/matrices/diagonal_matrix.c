@@ -27,3 +27,18 @@ int GetDiagonal(DiagonalMatrix *m, int index)
   assert(index >= 0 && index < m->size);
   return m->arr[index];
 }
+
+void DisplayDiagonalMatrix(DiagonalMatrix *m)
+{
+  for (int i = 0; i < m->size; i++) {
+    for (int leftZeros = 0; leftZeros < i; leftZeros++) {
+      printf("0 ");
+    }
+    printf("%d ", m->arr[i]);
+    for (int rightZeros = i + 1; rightZeros < m->size; rightZeros++) {
+      printf("0 ");
+    }
+  printf("\n");
+  }
+  printf("\n");
+}

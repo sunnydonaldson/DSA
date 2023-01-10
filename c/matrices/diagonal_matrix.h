@@ -12,5 +12,6 @@ typedef struct DiagonalMatrix {
 DiagonalMatrix *InstantiateDiagonalMatrix(size_t size);
 void SetDiagonal(int value, DiagonalMatrix *m, int index);
 int GetDiagonal(DiagonalMatrix *m, int index);
+void DisplayDiagonalMatrix(DiagonalMatrix *m);
 
 #endif
