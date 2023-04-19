@@ -102,6 +102,7 @@ void leftRotate(Array *arr, int numToRotate)
 }
 
 void resize(Array *arr) {
+  // Should probably implement shrinking as well.
   arr->size = arr->size * 2;
   int *tmp = malloc(arr->size * sizeof(int));
   for (size_t i = 0; i < arr->length; i++)
