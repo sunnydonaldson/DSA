@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 /**
 *****************************lower triangular matrix****************************
@@ -34,5 +35,7 @@ typedef struct LowerTriangularMatrix {
 
 LowerTriangularMatrix *InstantiateLowerTriangularMatrix(size_t size);
 void FreeLowerTriangularMatrix(LowerTriangularMatrix **m);
+void PrintLowerTriangularMatrix(LowerTriangularMatrix *m);
+int GetLowerTriangularMatrixValue(LowerTriangularMatrix *m, size_t i, size_t j);
 
 #endif
