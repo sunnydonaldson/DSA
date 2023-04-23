@@ -10,11 +10,19 @@ cc_library(
   hdrs = ["triangular_matrices.h"],
 )
 
+cc_library(
+  name = "symmetric_matrix",
+  srcs = ["symmetric_matrix.c"],
+  hdrs = ["symmetric_matrix.h"],
+  deps = [":triangular_matrices"],
+)
+
 cc_binary(
   name = "matrices",
   srcs = ["main.c"],
   deps = [
   ":diagonal_matrix",
   ":triangular_matrices",
+  ":symmetric_matrix",
   ],
 )

@@ -42,3 +42,8 @@ void DisplayDiagonalMatrix(DiagonalMatrix *m)
   }
   printf("\n");
 }
+
+void FreeDiagonalMatrix(DiagonalMatrix **m) {
+  free((*m)->arr);
+  free(m);
+}

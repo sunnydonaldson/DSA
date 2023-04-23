@@ -9,9 +9,10 @@ typedef struct DiagonalMatrix {
   int *arr;
 } DiagonalMatrix;
 
-DiagonalMatrix *InstantiateDiagonalMatrix(size_t size);
+void FreeDiagonalMatrix(DiagonalMatrix **m);
 void SetDiagonal(int value, DiagonalMatrix *m, int index);
 int GetDiagonal(DiagonalMatrix *m, int index);
 void DisplayDiagonalMatrix(DiagonalMatrix *m);
+DiagonalMatrix *InstantiateDiagonalMatrix(size_t size);
 
 #endif
