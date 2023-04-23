@@ -37,5 +37,6 @@ LowerTriangularMatrix *InstantiateLowerTriangularMatrix(size_t size);
 void FreeLowerTriangularMatrix(LowerTriangularMatrix **m);
 void PrintLowerTriangularMatrix(LowerTriangularMatrix *m);
 int GetLowerTriangularMatrixValue(LowerTriangularMatrix *m, size_t i, size_t j);
+void SetLowerTriangularMatrixValue(LowerTriangularMatrix *m, size_t i, size_t j, int value);
 
 #endif

@@ -35,11 +35,17 @@ void PrintLowerTriangularMatrix(LowerTriangularMatrix *m) {
 
 int GetLowerTriangularMatrixValue(LowerTriangularMatrix *m, size_t i, size_t j) {
   assert(i < m->size && j < m->size);
+  assert(i > 0 && j > 0);
 
   if (i < j) {
     return 0;
   }
 
   return m->arr[(i*(i-1) / 2) + (j - 1)];
-  
+}
+
+void SetLowerTriangularMatrixValue(LowerTriangularMatrix *m, size_t i, size_t j, int value) {
+  assert(i > 0 && j > 0);
+  assert(i < m->size && i >= j);
+  m->arr[(i * (i - 1) / 2) + (j -1)] = value;
 }

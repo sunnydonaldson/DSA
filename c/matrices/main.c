@@ -15,6 +15,10 @@ int main() {
 
   PrintLowerTriangularMatrix(lower);
 
+  printf("\n");
+  SetLowerTriangularMatrixValue(lower, 1, 1, 20);
+  PrintLowerTriangularMatrix(lower);
+
   FreeLowerTriangularMatrix(&lower);
   return 0;
 }
