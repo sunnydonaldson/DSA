@@ -30,14 +30,17 @@ class Min_heap():
     def _get_first_child(self, i):
         return 2 * i + 1
     
-    def peek():
-        if len(self._heap <= 0):
+    def peek(self):
+        if len(self._heap) <= 0:
             raise Exception('heap empty')
         return self._heap[0]
     
-    def pop():
-        if len(self.heap <= 0):
-            raise Exception('heap empty')
+    def pop(self):
+        result = self.peek()
+        self._heap[0] = self._heap[-1]
+        del self._heap[-1]
+        self._bubble_down(0)
+        return result
         
 
 
@@ -45,4 +48,6 @@ class Min_heap():
 
 arr = [9, 5, 3, 7, 2, 1]
 heap = Min_heap(arr)
+print(heap._heap)
+print(heap.pop())
 print(heap._heap)
