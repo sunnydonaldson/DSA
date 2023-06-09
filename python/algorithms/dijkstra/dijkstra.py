@@ -1,5 +1,11 @@
 import heapq
+"""
+    time: O(vlogv + vloge), where v is the number of verteces, and e the number of edges
+    space: O(v + e)
 
+    You could optimise this using a fibonacci heap, which allows you to decrease the keys (D[v] = ...)
+    in O(1) time instead of O(loge).  Resulting in a total O(vlogv + e) solution
+"""
 def dijkstra(src, dest, graph):
     P = {src: None} # predecessors
     V = set() # visited
