@@ -1,21 +1,32 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h>
 
-#define SIZE 1020000
-#define BOUNDS_SIZE 7
+#define NUM_BOUNDS 7
+
+static size_t NUM_BUCKETS = 150000000;
+
+
+void zeroFill(int *arr, size_t size) {
+  for (size_t i = 0; i < size; i++) {
+    arr[i] = 0; }
+}
 
 
 int main() {
-  int buckets[SIZE] = {0};
-  for (int i = 0; i < SIZE; i++) {
-    buckets[rand() % SIZE] += 1;
+  int *buckets = malloc(NUM_BUCKETS * sizeof(int));
+  int *visited = malloc(NUM_BUCKETS *sizeof(int));
+  zeroFill(buckets, NUM_BUCKETS);
+
+  for (int i = 0; i < NUM_BUCKETS; i++) {
+    buckets[rand() % NUM_BUCKETS ] += 1;
   }
 
-  int visited[SIZE] = {0};
-  int bounds[BOUNDS_SIZE] = {100, 50, 25, 10, 5, 1, 0};
-  int buckets_within_bound[BOUNDS_SIZE] = {0};
-  for (int i = 0; i < BOUNDS_SIZE; i++) {
-    for (int j = 0; j < SIZE; j++) {
+  int bounds[NUM_BOUNDS] = {100, 50, 25, 10, 5, 1, 0};
+  int buckets_within_bound[NUM_BOUNDS] = {0};
+
+  for (size_t i = 0; i < NUM_BOUNDS; i++) {
+    for (size_t j = 0; j < NUM_BUCKETS; j++) {
       if (visited[j]) {
         continue;
       }
@@ -26,8 +37,10 @@ int main() {
     }
   }
 
-  for (int i = 0; i < BOUNDS_SIZE; i++) {
+  for (size_t i = 0; i < NUM_BOUNDS; i++) {
     printf("%d: %d\n", bounds[i], buckets_within_bound[i]);
-  }    
+  }
+  free(buckets);   
+  free(visited);
   return 0;
 }
