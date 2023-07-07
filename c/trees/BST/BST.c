@@ -17,5 +17,22 @@ void DeleteNode(BSTNode **node) {
   DeleteNode(&(*node)->right);
   free(*node);
   *node = NULL;
+}
 
+void InsertNode(BSTNode *root, BSTNode *node) {
+  assert(root != NULL && node != NULL);
+
+  if (node->val < root->val) {
+    if (root->left == NULL) {
+      root->left = node;
+    } else {
+      InsertNode(root->left, node);
+    }
+  } else {
+    if (root->right == NULL) {
+      root->right = node;
+    } else {
+      InsertNode(root->right, node);
+    }
+  }
 }
