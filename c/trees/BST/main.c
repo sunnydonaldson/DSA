@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "./BST.h"
 
-void display(BSTNode *root) {
-  printf("%d, ", root->val);
-}
 
 int main() {
   BSTNode *root = CreateNode(12, NULL, NULL);
@@ -20,7 +17,15 @@ int main() {
   printf("\npostorder traversal: ");
   PostorderBST(root, &DisplayBSTNode);
 
-  DeleteNode(&root);
-  printf("root is null pointer? %d\n", root == NULL);
+  printf("\nHeight of tree: %zu", Height(root));
+
+  printf("\nInorder predecessor of root: %d", InorderPredecessor(root)->val);
+  printf("\nInorder successor of root: %d", InorderSuccessor(root)->val);
+  printf("\n");
+
+  root = DeleteTree(root);
+  printf("display after delete:\n");
+  InorderBST(root, &DisplayBSTNode);
+  root = NULL;
   return 0;
 }
