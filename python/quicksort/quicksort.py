@@ -1,6 +1,3 @@
-def main():
-    pass
-
 def quicksort(nums, left, right):
     if left >= right:
         return nums
@@ -31,3 +28,6 @@ def partition(nums, left, right):
 
     return i + 1
     
+if __name__ == "__main__":
+    arr = [3,2,3,1,2,4,5,5,6]
+    print(quicksort(arr, 0, len(arr) -1))
