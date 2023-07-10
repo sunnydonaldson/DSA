@@ -23,9 +23,8 @@ int main() {
   printf("\nInorder successor of root: %d", InorderSuccessor(root)->val);
   printf("\n");
 
-  root = DeleteTree(root);
+  DeleteTree(&root);
   printf("display after delete:\n");
   InorderBST(root, &DisplayBSTNode);
-  root = NULL;
   return 0;
 }

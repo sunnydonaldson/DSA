@@ -38,8 +38,6 @@ BSTNode *DeleteNode(BSTNode *node, int key) {
       node->val = replace->val;
       node->right = DeleteNode(replace, node->val);
     }
-    printf("replace not null? %d\n", replace != NULL);
-
   }
   return node;
 }
@@ -87,7 +85,7 @@ void PreorderBST(BSTNode *root, void (*process)(BSTNode *)) {
   PreorderBST(root->right, process);
 }
 
-void PostorderBST(BSTNode *root, void *(*process)(BSTNode *)) {
+void PostorderBST(BSTNode *root, void (*process)(BSTNode *)) {
   if (root == NULL) {
     return;
   }
@@ -129,7 +127,7 @@ BSTNode *InorderSuccessor(BSTNode *root) {
   return root;
 }
 
+/** Only use if you can guarantee that the node is a leaf **/
 static void DeleteLeaf(BSTNode *leaf) {
-  assert(!leaf->left && !leaf->right);
   free(leaf);
 }
