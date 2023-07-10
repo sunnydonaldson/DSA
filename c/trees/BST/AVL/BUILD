@@ -7,5 +7,5 @@ cc_library(
     name = "avl_tree",
     srcs = ["avl_tree.c"],
     hdrs = ["avl_tree.h"],
-    deps = ["../BST.h"],
+    deps = ["//c/trees/BST:bst"],
 )
