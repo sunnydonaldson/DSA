@@ -9,6 +9,7 @@ struct BSTNode {
   int val;
   BSTNode *left;
   BSTNode *right;
+  size_t height;
 };
 
 BSTNode *CreateNode(int val, BSTNode *left, BSTNode *right);

@@ -7,6 +7,8 @@ int main() {
   printf("root->val: %d\n", root->val);
   InsertNode(root, CreateNode(4, NULL, NULL));
   InsertNode(root, CreateNode(19, NULL, NULL));
+  InsertNode(root, CreateNode(22, NULL, NULL));
+  InsertNode(root, CreateNode(2, NULL, NULL));
 
   printf("inorder traversal: ");
   InorderBST(root, &DisplayBSTNode);
@@ -17,7 +19,7 @@ int main() {
   printf("\npostorder traversal: ");
   PostorderBST(root, &DisplayBSTNode);
 
-  printf("\nHeight of tree: %zu", Height(root));
+  printf("\nHeight of tree, from: %zu", Height(root));
 
   printf("\nInorder predecessor of root: %d", InorderPredecessor(root)->val);
   printf("\nInorder successor of root: %d", InorderSuccessor(root)->val);
