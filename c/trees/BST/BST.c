@@ -1,6 +1,7 @@
 #include "BST.h"
 
 static size_t Max(size_t a, size_t b);
+static void DeleteLeaf(BSTNode *leaf);
 
 BSTNode *CreateNode(int val, BSTNode *left, BSTNode *right) {
   BSTNode *node = malloc(sizeof(BSTNode));
@@ -10,8 +11,9 @@ BSTNode *CreateNode(int val, BSTNode *left, BSTNode *right) {
   return node;
 }
 
-void DeleteTree(BSTNode *node) {
-  PostorderBST(node, &DeleteNode);
+void DeleteTree(BSTNode **node) {
+  PostorderBST(*node, &DeleteLeaf);
+  *node = NULL;
 }
 
 BSTNode *DeleteNode(BSTNode *node, int key) {
@@ -125,4 +127,9 @@ BSTNode *InorderSuccessor(BSTNode *root) {
     root = root->left;
   }
   return root;
+}
+
+static void DeleteLeaf(BSTNode *leaf) {
+  assert(!leaf->left && !leaf->right);
+  free(leaf);
 }

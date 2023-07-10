@@ -18,7 +18,7 @@ void InsertNode(BSTNode *root, BSTNode *node);
 void DisplayBSTNode(BSTNode *root);
 void InorderBST(BSTNode *root, void (*process)(BSTNode *));
 void PreorderBST(BSTNode *root, void (*process)(BSTNode *));
-void PostorderBST(BSTNode *root, void *(*process)(BSTNode *));
+void PostorderBST(BSTNode *root, void (*process)(BSTNode *));
 size_t Height(BSTNode *root);
 BSTNode *InorderPredecessor(BSTNode *root);
 BSTNode *InorderSuccessor(BSTNode *root);
