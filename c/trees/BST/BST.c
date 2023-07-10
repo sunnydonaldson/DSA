@@ -43,16 +43,16 @@ BSTNode *DeleteNode(BSTNode *node, int key) {
 }
 
 void InsertNode(BSTNode *root, BSTNode *node) {
-  assert(root != NULL && node != NULL);
+  assert(root && node);
 
   if (node->val < root->val) {
-    if (root->left == NULL) {
+    if (!root->left) {
       root->left = node;
     } else {
       InsertNode(root->left, node);
     }
   } else {
-    if (root->right == NULL) {
+    if (!root->right) {
       root->right = node;
     } else {
       InsertNode(root->right, node);
@@ -61,12 +61,12 @@ void InsertNode(BSTNode *root, BSTNode *node) {
 }
 
 void DisplayBSTNode(BSTNode *root) {
-  assert(root != NULL);
+  assert(root);
   printf("%d, ", root->val);
 }
 
 void InorderBST(BSTNode *root, void (*process)(BSTNode *)) {
-  if (root == NULL) {
+  if (!root) {
     return;
   }
 
@@ -76,7 +76,7 @@ void InorderBST(BSTNode *root, void (*process)(BSTNode *)) {
 }
 
 void PreorderBST(BSTNode *root, void (*process)(BSTNode *)) {
-  if (root == NULL) {
+  if (!root) {
     return;
   }
 
@@ -86,7 +86,7 @@ void PreorderBST(BSTNode *root, void (*process)(BSTNode *)) {
 }
 
 void PostorderBST(BSTNode *root, void (*process)(BSTNode *)) {
-  if (root == NULL) {
+  if (!root) {
     return;
   }
 
