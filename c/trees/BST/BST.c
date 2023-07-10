@@ -42,7 +42,7 @@ BSTNode *DeleteNode(BSTNode *node, int key) {
   return node;
 }
 
-void InsertNode(BSTNode *root, BSTNode *node) {
+void InsertNode(BSTNode *root, BSTNode *node, void (PostProcess)(BSTNode *)) {
   assert(root && node);
   node->height = 1;
 
@@ -50,17 +50,21 @@ void InsertNode(BSTNode *root, BSTNode *node) {
     if (!root->left) {
       root->left = node;
     } else {
-        InsertNode(root->left, node);
+        InsertNode(root->left, node, PostProcess);
     }
   } else {
     if (!root->right) {
       root->right = node;
     } else {
-      InsertNode(root->right, node);
+      InsertNode(root->right, node, PostProcess);
     }
   }
 
   root->height = Max(root->left ? root->left->height : 0, root->right ? root->right->height : 0) + 1;
+
+  if (PostProcess) {
+    PostProcess(root);
+  }
 }
 
 void DisplayBSTNode(BSTNode *root) {

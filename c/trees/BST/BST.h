@@ -15,7 +15,7 @@ struct BSTNode {
 BSTNode *CreateNode(int val, BSTNode *left, BSTNode *right);
 void DeleteTree(BSTNode **root);
 BSTNode *DeleteNode(BSTNode *node, int key);
-void InsertNode(BSTNode *root, BSTNode *node);
+void InsertNode(BSTNode *root, BSTNode *node, void (PostProcess)(BSTNode *));
 void DisplayBSTNode(BSTNode *root);
 void InorderBST(BSTNode *root, void (*process)(BSTNode *));
 void PreorderBST(BSTNode *root, void (*process)(BSTNode *));
