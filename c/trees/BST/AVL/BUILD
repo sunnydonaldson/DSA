@@ -1,6 +1,7 @@
 cc_binary(
     name = "main",
     srcs = ["main.c"],
+    deps = [":avl_tree"],
 )
 
 cc_library(

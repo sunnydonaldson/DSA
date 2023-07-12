@@ -60,11 +60,11 @@ void InsertNode(BSTNode *root, BSTNode *node, void (PostProcess)(BSTNode *)) {
     }
   }
 
-  root->height = Max(root->left ? root->left->height : 0, root->right ? root->right->height : 0) + 1;
-
   if (PostProcess) {
     PostProcess(root);
   }
+
+  root->height = Max(root->left ? root->left->height : 0, root->right ? root->right->height : 0) + 1;
 }
 
 void DisplayBSTNode(BSTNode *root) {

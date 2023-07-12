@@ -52,8 +52,19 @@ For each node along the path you followed to get to where the new node was inser
       If RL imbalance: Right rotate from the child, it's now a RR imbalance, just do the RR rotation above.
 **/
 
+typedef enum Imbalance {
+  NONE,
+  LL,
+  LR,
+  RR,
+  RL,
+} Imbalance;
+
 static int BalanceFactor(BSTNode *root);
 static void RestoreAvl(BSTNode *);
+static Imbalance ClassifyImbalance(BSTNode *root);
+static void RotateRight(BSTNode *node);
+static void RotateLeft(BSTNode *node);
 
 void AvlInsert(BSTNode *root, BSTNode *node) {
   assert(root && node);
@@ -61,21 +72,70 @@ void AvlInsert(BSTNode *root, BSTNode *node) {
 
 }
 
-static void RestoreAvl(BSTNode * node) {
-  int balance_factor = BalanceFactor(node);
-  if (balance_factor <= 1 && balance_factor >= -1) {
-    return;
-  }
-
-  if (balance_factor < -1) {
-    // rotate_left
-  } else {
-    // rotate_right
+static void RestoreAvl(BSTNode *node) {
+  // I know I could condense this by changing some of the orders and using the fall-through
+  // EG. LR: RotateLeft, then just fall through to LL, but that's confusing. I'd rather be explicit.
+  switch (ClassifyImbalance(node)) {
+    case NONE: break;
+    case LL: RotateRight(node); break;
+    case LR: RotateLeft(node->left); RotateRight(node); break;
+    case RR: RotateLeft(node); break;
+    case RL: RotateRight(node->right); RotateLeft(node); break;
+    default: printf("This should be impossible!!!"); break;
   }
 }
 
+/** Returns {@code Imbalance} corresponding to the type of imbalance or NONE if balanced.
+
+  Example:
+    Imbalance.LL if the root has a left child with a left child.
+    Imbalance.NONE if the root is balanced.
+*/
+static Imbalance ClassifyImbalance(BSTNode *root) {
+  int balance_factor = BalanceFactor(root);
+  if (balance_factor <= 1 && balance_factor >= -1) {
+    return NONE;
+  }
+
+  if (balance_factor < 1) {
+    if (root->left->left) {
+      return LL;
+    } else {
+      return LR;
+    }
+  } else {
+    if (root->right->right) {
+      return RR;
+    } else {
+      return RL;
+    }
+  }
+}
 /** Returns negative if right subtree taller, positive if right shorter, else 0. **/
 static int BalanceFactor(BSTNode *root) {
   return (int)Height(root->left) - (int)Height(root->right);
+}
+
+static void RotateRight(BSTNode *node) {
+  int tmp = node->val;
+  node->val = node->left->val;
+  node->right = node->left;
+  node->right->val = tmp;
+
+  if (node->right->left) {
+    node->left = node->right->left;
+    node->right->left = NULL;
+  } else {
+    node->left = NULL;
+  }
+}
+
+static void RotateLeft(BSTNode *node) {
+  int tmp = node->val;
+  node->val = node->right->val;
+  node->left = node->right;
+  node->left->val = tmp;
+  node->right = node->left->right;
+  node->left->right = NULL;
 }
 
