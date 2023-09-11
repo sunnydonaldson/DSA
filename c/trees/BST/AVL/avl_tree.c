@@ -75,10 +75,11 @@ void AvlInsert(BSTNode *root, BSTNode *node) {
 static void RestoreAvl(BSTNode *node) {
   // I know I could condense this by changing some of the orders and using the fall-through
   // EG. LR: RotateLeft, then just fall through to LL, but that's confusing. I'd rather be explicit.
+  printf("restoring avl \n");
   switch (ClassifyImbalance(node)) {
-    case NONE: break;
-    case LL: RotateRight(node); break;
-    case LR: RotateLeft(node->left); RotateRight(node); break;
+    case NONE: printf("none\n"); break;
+    case LL: RotateRight(node); printf("LL \n"); break;
+    case LR: RotateLeft(node->left); printf("LR\n"); RotateRight(node); break;
     case RR: RotateLeft(node); break;
     case RL: RotateRight(node->right); RotateLeft(node); break;
     default: printf("This should be impossible!!!"); break;
@@ -117,17 +118,12 @@ static int BalanceFactor(BSTNode *root) {
 }
 
 static void RotateRight(BSTNode *node) {
-  int tmp = node->val;
-  node->val = node->left->val;
-  node->right = node->left;
-  node->right->val = tmp;
+  BSTNode *left = node->left;
+  BSTNode *left_right = left->right;
 
-  if (node->right->left) {
-    node->left = node->right->left;
-    node->right->left = NULL;
-  } else {
-    node->left = NULL;
-  }
+  left->right = node;
+  node->left = left_right;
+  node->height = 
 }
 
 static void RotateLeft(BSTNode *node) {
