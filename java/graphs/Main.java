@@ -1,6 +1,5 @@
 package graphs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -15,5 +14,11 @@ public class Main {
 
         Graph<Integer> graph = Graph.fromEdges(false, edges);
         System.out.println(graph);
+
+        graph.addEdge(new Edge<>(20, 21));
+        graph.addEdge(new Edge<>(30, 21));
+        graph.addEdge(new Edge<>(23, 25));
+
+        System.out.println(graph.numConnectedComponents());
     }
 }

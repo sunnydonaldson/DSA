@@ -2,7 +2,6 @@ package graphs;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class GraphNode<T> {
     private final T val;
@@ -18,6 +17,10 @@ public class GraphNode<T> {
 
     public void addNeighbour(T neighbour, Integer weight) {
        this.neighbours.put(neighbour, weight);
+    }
+
+    public Map<T, Integer> getNeighbours() {
+        return this.neighbours;
     }
 
     @Override
