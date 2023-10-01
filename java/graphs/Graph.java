@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Graph<T> {
     final Map<T, GraphNode<T>> graph = new HashMap<>();
@@ -54,6 +57,32 @@ public class Graph<T> {
             count++;
         }
         return count;
+    }
+
+    /**
+     * Note this only works on connected graphs. 
+     * @return boolean
+     */
+    public final boolean isBipartite() {
+        final Set<T> vertices = this.graph.keySet();
+        final Map<T, Boolean> colours = new HashMap<>();
+        vertices.forEach(v -> colours.put(v, null));
+        final AtomicBoolean isBipartite = new AtomicBoolean(true);
+        final var config = new BfsConfig.Builder<T>(sample(vertices), vertices);
+        final BfsStates<T> states = config.states;
+
+        vertices.forEach(v -> {
+            if (states.get(v).equals(VertexState.UNDISCOVERED)) {
+                colours.put(v, true);
+                this.Bfs(config.setKey(v).setEdgeProcess(e -> {
+                    if (colours.get(e.from).equals(colours.get(e.to))) {
+                        isBipartite.set(false);
+                    }
+                    colours.put(e.to, !colours.get(e.from));
+                }).build());
+            }
+        });
+        return isBipartite.get();
     }
 
     private final BfsResult<T> Bfs(BfsConfig<T> config) {
