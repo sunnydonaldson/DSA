@@ -12,8 +12,8 @@ public class BfsStates<T> {
     this.undiscovered.addAll(vertices);
   }
 
-  public static final <T> BfsStates<T> fromGraph(Graph<T> graph) {
-    return new BfsStates<T>(graph.graph.keySet());
+  public static final <T> BfsStates<T> fromVertices(Set<T> vertices) {
+    return new BfsStates<T>(vertices);
   }
 
   public final void update(T key) {
