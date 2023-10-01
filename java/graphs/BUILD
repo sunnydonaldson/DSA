@@ -11,6 +11,7 @@ java_library(
         "Graph.java",
         "GraphNode.java",
         "Edge.java",
+        "BfsConfig.java",
         "BfsResult.java",
         "BfsStates.java",
         "VertexState.java",

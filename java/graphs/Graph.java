@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Graph<T> {
     final Map<T, GraphNode<T>> graph = new HashMap<>();
@@ -36,48 +37,48 @@ public class Graph<T> {
         this.graph.get(edge.from).addNeighbour(edge.to, edge.weight);
     }
 
-    final Set<T> getNeighbours(T key) {
-        return graph.get(key)
-            .getNeighbours()
-            .keySet();
+    final Stream<Edge<T>> getNeighbourEdges(T vertex) {
+        return graph.get(vertex)
+            .getNeighbours().keySet().stream()
+            .map(n -> new Edge<>(vertex, n));
     }
 
     public final Integer numConnectedComponents() {
-        BfsStates<T> states = BfsStates.fromVertices(this.graph.keySet());
+        Set<T> vertices = this.graph.keySet();
+        BfsConfig.Builder<T> config = new BfsConfig.Builder<T>(sample(vertices), vertices);
+        Set<T> undiscovered = config.states.undiscovered;
 
         int count = 0;
-        while (!states.undiscovered.isEmpty()) {
-            Bfs(sample(states.undiscovered), states);
+        while (!undiscovered.isEmpty()) {
+            Bfs(config.setKey(sample(undiscovered)).build());
             count++;
         }
         return count;
     }
 
-   public final BfsResult<T> Bfs(T key) {
-    return Bfs(key, BfsStates.fromVertices(this.graph.keySet()));
-   } 
-
-    private final BfsResult<T> Bfs(T key, BfsStates<T> states) {
-        Deque<T> queue = new ArrayDeque<>(List.of(key));
+    private final BfsResult<T> Bfs(BfsConfig<T> config) {
+        Deque<T> queue = new ArrayDeque<>(List.of(config.key()));
         Map<T, T> parents = new HashMap<>();
     
         while (!queue.isEmpty()) {
           T current = queue.pop();
-          // Add option to pre-process vertex here.
-          // Add a foreach with optional processing of the edge here.
-          this.getNeighbours(current).stream()
-            .filter(n -> states.get(n).equals(VertexState.UNDISCOVERED))
+          config.preProcess().accept(current);
+
+          this.getNeighbourEdges(current)
+            .peek(n -> config.edgeProcess().accept(n))
+            .map(n -> n.to)
+            .filter(n -> config.states().get(n).equals(VertexState.UNDISCOVERED))
             .forEach(n -> {
-              states.update(n);
+              config.states().update(n);
               parents.put(n, current);
               queue.add(n);
             });
-          // Optional post-processing here.
-          states.update(current);
+            config.postProcess().accept(current);
+            config.states().update(current);
         }
 
-        return new BfsResult<>(states, parents);
-      }
+        return new BfsResult<>(config.states(), parents);
+    }
     
     private static final <T> T sample(Set<T> set) {
         return set.stream()
